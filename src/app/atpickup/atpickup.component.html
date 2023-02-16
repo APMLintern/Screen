@@ -1,0 +1,63 @@
+<div class="table3">
+
+    <div class="table_heading">
+        At Pickup &nbsp; <input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba3" disabled>
+      </div>
+      <br>
+    <table   class="shpl3" >
+        <thead>
+            <tr>
+               
+                <th>shipment Number</th>
+            
+                <th>Documents<br>
+                    Fit||INC||PUC||NP||permit</th>
+                <th>Vehicle No.</th>
+                <th>Vehicle type</th>
+                <th>shipment created</th>
+                <th>from</th>
+                <th>to</th>
+            
+                <th>arrivalTime</th>
+                <th>gateInTime vs arrivalTime</th>
+                <th>departureTime vs gateInTime</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let b of (this.googlesheet| filter:searchText ) " >
+            <ng-container *ngFor="let a of (this.lis| filter:searchText )  ">
+                <tr *ngIf="!a.noMatch &&a['shipmentTrackingStatus']=='At Pickup Point' && a['fleetInfo']['vehicle']['vehicleRegistrationNumber']===b['rc_regn_no'] ">
+               
+                    <td>{{a['shipmentNumber']}}</td>
+                    <td >
+                        <button  [ngClass]="color(b['rc_fit_upto'])"></button>&nbsp;
+                        <button  [ngClass]="color(b['rc_insurance_upto'])"></button>&nbsp;
+                        <button  [ngClass]="color(b['rc_pucc_upto'])"></button>&nbsp;
+                        <button  [ngClass]="color(b['rc_np_upto'])"></button>&nbsp;
+                        <button  [ngClass]="color(b['rc_permit_valid_upto'])"></button>&nbsp;
+                        
+                    </td>
+                    <td>{{a['fleetInfo']['vehicle']['vehicleRegistrationNumber']}}</td>
+                    <td>{{a['fleetInfo']['vehicle']['vehicleLoadType']['name']}}</td>
+                    <td>{{GetFullName(a['creationTime'])}}</td>
+                 
+                  
+                    <td>{{a['shipmentStages'][0]['place']['name']}}</td>
+                    <td>{{a['shipmentStages'][1]['place']['name']}}</td>
+                  
+                    <td>{{date(a['shipmentStages'][0]['arrivalTime'])}}</td>
+                 
+                   
+
+                      <td  [ngClass]="{ 'green': subtractDates1(a['shipmentStages'][0]['gateInTime'] ,a['shipmentStages'][0]['arrivalTime']) > '-1 days 0 hours 0 minutes', 'red': subtractDates1(a['shipmentStages'][0]['gateInTime'] ,a['shipmentStages'][0]['arrivalTime']) <= '-1 days 0 hours 0 minutes'}" >{{subtractDates1(a['shipmentStages'][0]['gateInTime'] ,a['shipmentStages'][0]['arrivalTime'])}}</td>
+                      
+                      <td  [ngClass]="{ 'green': subtractDates1(a['shipmentStages'][0]['departureTime'] ,a['shipmentStages'][0]['gateInTime']) > '-1 days 0 hours 0 minutes', 'red': subtractDates1(a['shipmentStages'][0]['departureTime'] ,a['shipmentStages'][0]['gateInTime']) <= '-1 days 0 hours 0 minutes'}" >{{subtractDates1(a['shipmentStages'][0]['departureTime'] ,a['shipmentStages'][0]['gateInTime'])}}</td>
+
+                    <td>{{a['shipmentStages'][0]['tripPoint']['remainingDistance']}}</td>
+                    <td>{{a['shipmentStages'][0]['tripPoint']['remainingDistance']}}</td>
+                    </tr>
+            </ng-container>
+        </ng-container>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,45 @@
+<div class="table2">
+
+    <div class="table_heading">
+        ENROUTE FOR PICKUP &nbsp; <input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba2" disabled>
+      </div>
+      <br>
+    <table   class="shpl2" >
+        <thead>
+            <tr>
+               
+                  <th>shipment Number</th>
+                <th>Vehicle No.</th>
+                <th>Vehicle type</th>
+                <th>shipment created</th>
+                <th>from</th>
+                <th>to</th>
+                <th>expected time</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let a of (this.lis| filter:searchText )  ">
+                <tr *ngIf="!a.noMatch && a['shipmentTrackingStatus']=='Enroute For Pickup'">
+                
+                    <td>{{a['shipmentNumber']}}</td>
+                  
+                    <td>{{a['fleetInfo']['vehicle']['vehicleRegistrationNumber']}}</td>
+                    <td>{{a['fleetInfo']['vehicle']['vehicleLoadType']['name']}}</td>
+                    <td>{{GetFullName(a['creationTime'])}}</td>
+                 
+                  
+                    <td>{{a['shipmentStages'][0]['place']['name']}}</td>
+                    <td>{{a['shipmentStages'][1]['place']['name']}}</td>
+                  
+                    <td>{{date(a['shipmentStages'][0]['arrivalTime'])}}</td>
+                 
+                   
+
+                  
+
+                    </tr>
+            </ng-container>
+        </tbody>
+    </table>
+</div>

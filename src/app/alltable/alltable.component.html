@@ -1,0 +1,686 @@
+<!-- <button class="button" (click)="gotoallvehicle()">All Vehicle</button>
+<button class="button" (click)="gotooffduty()">Off Duty </button>
+<button class="button" (click)="gotomaintainence()">maintainence</button>
+<button class="button" (click)="gotoAvailable()">available</button>
+<button class="button" (click)="gotoempty()">empty Movement</button>
+<button class="button" (click)="gotopickUp()">PickUp</button>
+<button class="button" (click)="gotoloading()">loading</button>
+<button class="button" (click)="gotoinTransit()">inTransit</button>
+<button class="button" (click)="gotounloading()">unloading</button>
+<button class="button" (click)="gotodlexpire()">DL Expire </button>
+<button class="button" (click)="gotocarentry()">Car Entry </button>
+<button class="button" (click)="gotobranch()">Branch Search </button> -->
+<!-- <button class="button" (click)="gotoalltable()">All Table </button> -->
+<!-- <button class="button" (click)="gotocharts()">DashBoards</button>
+<button class="button" (click)="gotocharts()">At unloading</button>
+<button class="button" (click)="gotocharts()">at pickup</button>
+<button class="button" (click)="gotocharts()">Completed</button>
+<button class="button" (click)="gotocharts()">enroute- Pickup</button>
+<button class="button" (click)="gotocharts()">Intransit</button> -->
+<hr>
+<!-- <meta http-equiv="refresh" content="30; https://availableapml.netlify.app/#/sxl "/> -->
+
+<div class="display">
+    <div>
+        <div class="table1"> 
+               <div class="table-infor">
+                <table   class="shpl1" >
+                    <thead>
+                        <tr>
+                            <th>Pending Order  <input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba1" disabled>
+                            </th>
+                            <th>Order Number  </th>
+                            <th>Status </th>
+                            <th>Secondary Status </th>
+                            <th>Order Date </th>
+                            <th>Booking branch </th>
+                            <th>Order By </th>
+                           
+                            
+                            <th>Consignor</th>
+                            <th>Consignee</th>
+                      
+                           <th>Vehicle Type</th>
+                            <th>expectedPickupDate</th>
+                       
+                           
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        <ng-container *ngFor="let a of (this.lis| filter:searchText )  ">
+                           
+                            <tr *ngIf="a.noMatch">
+                                <td></td>
+                                <td>{{a['orderNumber']}}</td>
+                                <td>{{a['status']}}</td>
+                                <td  [ngClass]="{ 'planned': a['secondaryStatus'] === 'PLACED', 'not-planned': a['secondaryStatus'] !== 'PLACED' }">{{a['secondaryStatus']}}</td>
+                                <td>{{GetFullName(a['orderReceiveDate'])}}</td>
+                                <td>{{a['salesOffice']['name']}}</td>
+                             
+                                <td>{{orderby(a['customFields'])}}</td>
+                                
+                                <td>{{a['lineItems'][0]['consigner']['name']}}</td>
+                                <td>{{a['lineItems'][0]['consignee']['places'][0]['name']}}</td>
+                              
+                                
+                                <td>{{a['lineItems'][0]['allowedLoadTypes'][0]['name']}}</td>
+                                <td [ngClass]="{ 'green': differentdate1(a['lineItems'][0]['expectedPickupDate']) > 86400000 , 'yellow':  differentdate1(a['lineItems'][0]['expectedPickupDate'])  > 21600000 && differentdate1(a['lineItems'][0]['expectedPickupDate']) < 86400000, 'orange':  differentdate1(a['lineItems'][0]['expectedPickupDate'])  > 0 && differentdate1(a['lineItems'][0]['expectedPickupDate']) < 21600000,'red': differentdate1(a['lineItems'][0]['expectedPickupDate']) < 0}">{{differentdate(a['lineItems'][0]['expectedPickupDate'])}}</td>
+                              
+                               
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+
+                <mat-card class="matcard">
+                    <img src="https://www.agarwalpackers.com/images/agarwal-packers-logo.png" alt="Team logo" class="team-logo" style="float: left;">
+                    
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeD-i0ohxC5vcjcU5NcPAvRZslWZnGElVgaQ&usqp=CAU"  alt="Team logo" class="team-logo" style="float: right;  width: 20%; height: 6%">
+                    <br>
+                    <br>
+                    <mat-card-title style="font-family: 'Arial Black', sans-serif; text-transform: uppercase; letter-spacing: 2px; font-size: 45px;">APML SHPL</mat-card-title>
+                    <mat-card-content>
+                        <br>
+                        <br>
+                        <br>
+                        <br>                 
+                        <br>
+
+                        
+                        
+
+                      <table style="width: 100%; overflow-x: scroll">
+                        <tr>
+                     
+                        </tr>
+                        &nbsp;  &nbsp; &nbsp;&nbsp;
+                        &nbsp;  &nbsp; &nbsp;&nbsp;
+                        <tr >
+                          <td>Pending Order<input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba1" disabled></td>
+                          <td>Onway Pickup <input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba2" disabled></td>
+                          <td>At Pickup  <input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba3" disabled></td>
+                          <td>In Transit  <input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba4" disabled></td>
+                          <td>At unloading <input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba5" disabled></td>
+                          <td>Completed <input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+                          <td>POD Pending <input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+                          <td>Billing Pending <input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+                          <td>Bill Submitted <input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+                          <td>MR <input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+                                                  
+                        </tr>
+                        &nbsp;  &nbsp; &nbsp;&nbsp;
+                        &nbsp;  &nbsp; &nbsp;&nbsp;
+                        <tr >
+                            <td>After 24 HRS <br>   Pending Order<input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba7" disabled></td>
+                            <td>REQ TIME < 8 HRS <input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba2" disabled></td>
+                            <td>At Pickup < 4HRS <input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba3" disabled></td>
+                            <td>In Transit RRPD < 200 KMS <input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba4" disabled></td>
+                            <td>At unloading  < 4HRS <input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba5" disabled></td>
+
+                            <td>EARLY <input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+
+
+                            <td>POD Pending < 24 hrs<input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+                       
+                            <td>Billing Pending <input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+                            <td>Bill Submitted <input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+                            <td>MR <input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+                                                    
+                          </tr>
+                          &nbsp;  &nbsp; &nbsp;&nbsp;
+                          &nbsp;  &nbsp; &nbsp;&nbsp;
+                
+                          <tr >
+                            <td>Between 6hrs and 24 hrs <input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba8" disabled></td>
+                            <td>REQ TIME < 4 HRS<input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba2" disabled></td>
+                            <td>At Pickup < 8H  <input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba3" disabled></td>
+                            <td>In Transit RRPD < 300 <input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba4" disabled></td>
+                            <td>At unloading   < 12 HRS <input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba5" disabled></td>
+                            <td>ONTIME <input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+                            <td>POD Pending < 3 days<input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+                       
+                            <td>Billing Pending <input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+                            <td>Bill Submitted <input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+                            <td>MR <input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+                                                    
+                          </tr>
+                          <tr >
+                            <td>0 to 6 HRS Pending Order<input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba9" disabled></td>
+                            <td>REQ TIME LESS 2 HRS<input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba2" disabled></td>
+                            <td>At Pickup > 12H <input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba3" disabled></td>
+                            <td>In Transit  RRPD > 300  <input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba4" disabled></td>
+                            <td>At unloading  > 12 HRS<input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba5" disabled></td>
+                            <td>DELAYED <input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+                            <td>POD Pending > 3 Days<input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+                         
+                            <td>Billing Pending <input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+                            <td>Bill Submitted <input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+                            <td>MR <input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+                                                    
+                          </tr>
+                          <tr >
+                            <td>Delayed Placement<input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba10" disabled></td>
+                            <td>REQ TIME LESS 2 HRS<input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba2" disabled></td>
+                            <td>At Pickup > 12H <input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba3" disabled></td>
+                            <td>In Transit  RRPD > 300  <input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba4" disabled></td>
+                            <td>At unloading  > 12 HRS<input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba5" disabled></td>
+                            <td>DELAYED <input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+                            <td>POD Pending > 3 Days<input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+                         
+                            <td>Billing Pending <input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+                            <td>Bill Submitted <input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+                            <td>MR <input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+                                                    
+                          </tr>
+                        
+                      </table>
+                      &nbsp;  &nbsp; &nbsp;&nbsp;
+                      &nbsp;  &nbsp; &nbsp;&nbsp;  &nbsp;  &nbsp; &nbsp;&nbsp;
+                      &nbsp;  &nbsp; &nbsp;&nbsp;
+                      &nbsp;  &nbsp; &nbsp;&nbsp;
+                      &nbsp;  &nbsp; &nbsp;&nbsp;  &nbsp;  &nbsp; &nbsp;&nbsp;
+                      &nbsp;  &nbsp; &nbsp;&nbsp;
+                      &nbsp;  &nbsp; &nbsp;&nbsp;
+                      &nbsp;  &nbsp; &nbsp;&nbsp;  &nbsp;  &nbsp; &nbsp;&nbsp;
+                      &nbsp;  &nbsp; &nbsp;&nbsp;
+                      
+                      <mat-card-title style="font-family: 'Arial Black', sans-serif; text-transform: uppercase; letter-spacing: 2px; font-size: 45px;">CONTRACT</mat-card-title>
+                      &nbsp;  &nbsp; &nbsp;&nbsp;
+                      &nbsp;  &nbsp; &nbsp;&nbsp;  &nbsp;  &nbsp; &nbsp;&nbsp;
+                      &nbsp;  &nbsp; &nbsp;&nbsp;
+                      &nbsp;  &nbsp; &nbsp;&nbsp;
+                      &nbsp;  &nbsp; &nbsp;&nbsp;  &nbsp;  &nbsp; &nbsp;&nbsp;
+                      &nbsp;  &nbsp; &nbsp;&nbsp;
+                      <div style="display: flex;">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>SUSTAINIBILITY 2 % PER ANNUM</td>
+                                  </tr>
+                              <!-- table 2 rows -->
+                              <tr>
+                                <td>Modernisation of Supplier Transportaion fleet</td>
+                              </tr>
+                              <tr>
+                                <td>Improvement in Capacity Utilisation</td>
+                              </tr>
+                              <!-- ... -->
+                              <tr>
+                                <td>Routing Optimisation</td>
+                              </tr>
+                              <tr>
+                                  <td>Reduction of Wastage in Idle Time</td>
+                                </tr>
+                                <tr>
+                                  <td>Reporting of co2 in kilometer tonnes</td>
+                                </tr>
+                                <tr>
+                                    <td>Report on fleet modernisation with 12 months</td>
+                                  </tr>
+                            
+                            </tbody>
+                          </table>
+                      
+                          <table>
+                            <tbody>
+                              <!-- table 2 rows -->
+                              <tr>
+                                <td>POD REPORT 9 AM EMAIL</td>
+                              </tr>
+                              <tr>
+                                <td>POD WITHIN 24 HRS OF DELIVERY</td>
+                              </tr>
+                              <!-- ... -->
+                              <tr>
+                                <td>COLOADING TRANSHIPMENT FORBIDDEN</td>
+                              </tr>
+                              <tr>
+                                  <td>UNLOADING EQUIPMENT IF REQUIRED</td>
+                                </tr>
+                                <tr>
+                                  <td>EMERGENCY PICKUP 4-6 HRS</td>
+                                </tr>
+                                <tr>
+                                  <td>ESCORT PRE AGREED RATE IF REQ</td>
+                                </tr>
+                                <tr>
+                                  <td>1 DAY BEFORE REACHING PRE INFORM CONTACT</td>
+                                </tr>
+                                <tr>
+                                    <td>MONTHLY SHIPMENT LEVEL DELIVERY REPORT  </td>
+                                  </tr>
+                                  <tr>
+                                    <td>MINUMUM 95% ON TIME DELIVERY PER MONTH </td>
+                                  </tr>
+                                  <tr>
+                                    <td>DELAY PENALTY AFTER 2 DAYS </td>
+                                  </tr>
+                            </tbody>
+                          </table>
+
+                          <table>
+                            <tbody>
+                              <!-- table 2 rows -->
+                              <tr>
+                                <td>PER DAY RUNNING 400 KMS</td>
+                              </tr>
+                              <tr>
+                                <td>4 HR VEHICLE PLACEMENT IN MMR IF REQ</td>
+                              </tr>
+                              <!-- ... -->
+                              <tr>
+                                <td>VEHICLE PLACEMENT 24 HRS </td>
+                              </tr>
+                              <tr>
+                                  <td>MAX 3 HRS WAIT AT HUB</td>
+                                </tr>
+                                <tr>
+                                  <td>Intransit Time</td>
+                                </tr>
+                                <tr>
+                                  <td>arrive to gate in</td>
+                                </tr>
+                                <tr>
+                                  <td>gate in to depart</td>
+                                </tr>
+                                <tr>
+                                    <td>depart to POD </td>
+                                  </tr>
+                                  <tr>
+                                    <td>depart to POD ,/td>
+                                  </tr>
+                            </tbody>
+                          </table>
+                      </div>
+                    
+                    </mat-card-content>
+                  </mat-card>
+                  
+                  
+               </div>
+            
+           
+        </div>
+        <div class="table2">
+            <table   class="shpl2" >
+                <thead>
+                    <tr>
+                        <th>Enroute For Pickup <input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba2" disabled></th>
+                        <th>Order Number </th>
+                        <th>Status </th>
+                        <th>Secondary Status </th>
+                        <th>Order Date </th>
+                        <th>Booking branch </th>
+                        <th>Order By </th>
+                       
+                        
+                        <th>Consignor</th>
+                        <th>Consignee</th>
+                        
+                        
+                        <th>Line Items </th>
+                       <th>vehicle Number </th>
+                       <th>vehicle Type </th>
+                        <th>Creation Time </th>
+                     
+                        <th>Shippment Number</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Order-Expected Pickup </th>
+                        <th>Order to placement</th>
+                  
+                        <th>Remaining distance </th>
+                        <th>Expected Pickup- Now </th>
+                     
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let a of (this.lis| filter:searchText )  ">
+                        <tr *ngIf="!a.noMatch && a['shipmentTrackingStatus']=='Enroute For Pickup'">
+                            <td></td>
+                            <td>{{a['orderNumber']}}</td>
+                            <td>{{a['status']}}</td>
+                            <td [ngClass]="{ 'planned': a['secondaryStatus'] === 'PLACED', 'not-planned': a['secondaryStatus'] !== 'PLACED' }">{{a['secondaryStatus']}}</td>
+                            <td>{{GetFullName(a['orderReceiveDate'])}}</td>
+                            <td>{{a['salesOffice']['name']}}</td> 
+                            <td>{{orderby(a['customFields'])}}</td>
+                            
+                            <td>{{a['lineItems'][0]['consigner']['name']}}</td>
+                            <td>{{a['lineItems'][0]['consignee']['places'][0]['name']}}</td>
+                          
+                            
+                            <td>{{lineofitem(a['lineItems'])}}</td>
+                            <td>{{a['fleetInfo']['vehicle']['vehicleRegistrationNumber']}}</td>
+                            <td>{{a['fleetInfo']['vehicle']['vehicleLoadType']['name']}}</td>
+                            <td>{{GetFullName(a['creationTime'])}}</td>
+                         
+                            <td>{{a['shipmentNumber']}}</td>
+                            <td>{{a['shipmentStages'][0]['place']['name']}}</td>
+                            <td>{{a['shipmentStages'][1]['place']['name']}}</td>
+                            <td [ngClass]="{ 'green': differentdate1(a['lineItems'][0]['expectedPickupDate']) > 00, 'red': differentdate1(a['lineItems'][0]['expectedPickupDate']) <= 00}">{{differentdateor_ex(a['lineItems'][0]['expectedPickupDate'], a['orderReceiveDate']) }}</td>
+                            <td [ngClass]="{ 'green-text': GetTimeDifference(a['orderReceiveDate'], a['creationTime']) > -20, 'red-text': GetTimeDifference(a['orderReceiveDate'], a['creationTime']) <= -20}" >{{ GetTimeDifference1(a['orderReceiveDate'], a['creationTime']) }}</td>
+                            
+                      
+
+                            <td>{{kms(a['shipmentStages'][0]['tripPoint']['remainingDistance'])}}</td>
+                            <td [ngClass]="{ 'green': differentdate1(a['lineItems'][0]['expectedPickupDate']) > 00, 'red': differentdate1(a['lineItems'][0]['expectedPickupDate']) <= 00}">{{differentdate(a['lineItems'][0]['expectedPickupDate'])}}</td>
+                          
+                            </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+        <div class="table3">
+            <h1></h1>
+            <table   class="shpl3" >
+                <thead>
+                    <tr>
+                        <th>At Pickup <input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba3" disabled></th>
+                        <th>Order Number </th>
+                        <th>Status </th>
+                        <th>Secondary Status </th>
+                        <th>Order Date </th>
+                        <th>Booking branch</th>
+                        <th>Order By </th>
+                       
+                        
+                        <th>Consignor</th>
+                        <th>Consignee</th>
+                  <th>Line Items</th>
+                    
+                       <th>vehicle Number </th>
+                       <th>vehicle Type </th>
+                        <th>Creation Time </th>
+                        <th>Vehicle Status </th>
+                        <th>Shippment Number</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Order to placement</th>
+                        <th>arrivalTime</th>
+                        <th>Expected pickup vs actucal arrivalTime </th>
+                        <th>arrivalTime vs gateintime </th>
+                        <th>gateintime vs departureTime </th>
+                        <th>Remaining distance </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let a of (this.lis| filter:searchText )  ">
+                        <tr *ngIf="!a.noMatch &&a['shipmentTrackingStatus']=='At Pickup Point' ">
+                            <td></td>
+                            <td>{{a['orderNumber']}}</td>
+                            <td>{{a['status']}}</td>
+                            <td [ngClass]="{ 'planned': a['secondaryStatus'] === 'PLACED', 'not-planned': a['secondaryStatus'] !== 'PLACED' }">{{a['secondaryStatus']}}</td>
+                            <td>{{GetFullName(a['orderReceiveDate'])}}</td>
+                            <td>{{a['salesOffice']['name']}}</td> 
+                            <td>{{orderby(a['customFields'])}}</td>
+                            
+                            <td>{{a['lineItems'][0]['consigner']['name']}}</td>
+                            <td>{{a['lineItems'][0]['consignee']['places'][0]['name']}}</td>
+                          
+                            
+                            <td>{{lineofitem(a['lineItems'])}}</td>
+                            <td>{{a['fleetInfo']['vehicle']['vehicleRegistrationNumber']}}</td>
+                            <td>{{a['fleetInfo']['vehicle']['vehicleLoadType']['name']}}</td>
+                            <td>{{GetFullName(a['creationTime'])}}</td>
+                            <td>{{a['shipmentTrackingStatus']}}</td>
+                            <td>{{a['shipmentNumber']}}</td>
+                            <td>{{a['shipmentStages'][0]['place']['name']}}</td>
+                            <td>{{a['shipmentStages'][1]['place']['name']}}</td>
+                            <td [ngClass]="{ 'green': GetTimeDifference(a['orderReceiveDate'], a['creationTime']) > -20, 'red': GetTimeDifference(a['orderReceiveDate'], a['creationTime']) <= -20}" >{{ GetTimeDifference1(a['orderReceiveDate'], a['creationTime']) }}</td>
+                            
+                            <td>{{date(a['shipmentStages'][0]['arrivalTime'])}}</td>
+                         
+                              <td  [ngClass]="{ 'green': subtractDates(a['lineItems'][0]['expectedPickupDate'], a['shipmentStages'][0]['arrivalTime']) > '-1 days 0 hours 0 minutes', 'red': subtractDates(a['lineItems'][0]['expectedPickupDate'], a['shipmentStages'][0]['arrivalTime']) <= '-1 days 0 hours 0 minutes'}" >{{subtractDates(a['lineItems'][0]['expectedPickupDate'], a['shipmentStages'][0]['arrivalTime'])}}</td>
+
+                              <td  [ngClass]="{ 'green': subtractDates1(a['shipmentStages'][0]['gateInTime'] ,a['shipmentStages'][0]['arrivalTime']) > '-1 days 0 hours 0 minutes', 'red': subtractDates1(a['shipmentStages'][0]['gateInTime'] ,a['shipmentStages'][0]['arrivalTime']) <= '-1 days 0 hours 0 minutes'}" >{{subtractDates1(a['shipmentStages'][0]['gateInTime'] ,a['shipmentStages'][0]['arrivalTime'])}}</td>
+                              
+                              <td  [ngClass]="{ 'green': subtractDates1(a['shipmentStages'][0]['departureTime'] ,a['shipmentStages'][0]['gateInTime']) > '-1 days 0 hours 0 minutes', 'red': subtractDates1(a['shipmentStages'][0]['departureTime'] ,a['shipmentStages'][0]['gateInTime']) <= '-1 days 0 hours 0 minutes'}" >{{subtractDates1(a['shipmentStages'][0]['departureTime'] ,a['shipmentStages'][0]['gateInTime'])}}</td>
+
+                            <td>{{a['shipmentStages'][0]['tripPoint']['remainingDistance']}}</td>
+                            </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+        <div class="table4">
+
+            <table   class="shpl4"  >
+                <thead>
+                    <tr>
+                        <th>In Transit <input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba4" disabled></th>
+                        <th>Order Number </th>
+                        <th>Status </th>
+                        <th>Secondary Status </th>
+                        <th>Order Date </th>
+                        <th>Booking branch </th>
+                        <th>Order By </th>
+                       
+                        
+                        <th>Consignor</th>
+                        <th>Consignee</th>
+                        
+                        
+                        <th>Line Items </th>
+                       <th>vehicle Number </th>
+                       <th>vehicle Type </th>
+                        <th>Creation Time </th>
+                        <th>Vehicle Status </th>
+                        <th>Shippment Number</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Order to placement</th>
+                        <th>arrivalTime</th>
+                        <th>Expected pickup vs actucal arrivalTime </th>
+                        <th>arrivalTime vs gateintime </th>
+                        <th>gateintime vs departureTime </th>
+                        <th>Remaining distance </th>
+                        <th>Current Location </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let a of (this.lis| filter:searchText )  ">
+                        <tr *ngIf="!a.noMatch && a['shipmentTrackingStatus']=='Enroute For Delivery'">
+                            <td></td>
+                            <td>{{a['orderNumber']}}</td>
+                            <td>{{a['status']}}</td>
+                            <td [ngClass]="{ 'planned': a['secondaryStatus'] === 'PLACED', 'not-planned': a['secondaryStatus'] !== 'PLACED' }">{{a['secondaryStatus']}}</td>
+                            <td>{{GetFullName(a['orderReceiveDate'])}}</td>
+                            <td>{{a['salesOffice']['name']}}</td> 
+                            <td>{{orderby(a['customFields'])}}</td>
+                            
+                            <td>{{a['lineItems'][0]['consigner']['name']}}</td>
+                            <td>{{a['lineItems'][0]['consignee']['places'][0]['name']}}</td>
+                          
+                            
+                            <td>{{lineofitem(a['lineItems'])}}</td>
+                            <td>{{a['fleetInfo']['vehicle']['vehicleRegistrationNumber']}}</td>
+                            <td>{{a['fleetInfo']['vehicle']['vehicleLoadType']['name']}}</td>
+                            <td>{{GetFullName(a['creationTime'])}}</td>
+                            <td>{{a['shipmentTrackingStatus']}}</td>
+                            <td>{{a['shipmentNumber']}}</td>
+                            <td>{{a['shipmentStages'][0]['place']['name']}}</td>
+                            <td>{{a['shipmentStages'][1]['place']['name']}}</td>
+                            <td [ngClass]="{ 'green': GetTimeDifference(a['orderReceiveDate'], a['creationTime']) > -20, 'red': GetTimeDifference(a['orderReceiveDate'], a['creationTime']) <= -20}" >{{ GetTimeDifference1(a['orderReceiveDate'], a['creationTime']) }}</td>
+                            
+                            <td>{{date(a['shipmentStages'][0]['arrivalTime'])}}</td>
+                         
+                              <td  [ngClass]="{ 'green': subtractDates(a['lineItems'][0]['expectedPickupDate'], a['shipmentStages'][0]['arrivalTime']) > '-1 days 0 hours 0 minutes', 'red': subtractDates(a['lineItems'][0]['expectedPickupDate'], a['shipmentStages'][0]['arrivalTime']) <= '-1 days 0 hours 0 minutes'}" >{{subtractDates(a['lineItems'][0]['expectedPickupDate'], a['shipmentStages'][0]['arrivalTime'])}}</td>
+
+                              <td  [ngClass]="{ 'green': subtractDates1(a['shipmentStages'][0]['gateInTime'] ,a['shipmentStages'][0]['arrivalTime']) > '-1 days 0 hours 0 minutes', 'red': subtractDates1(a['shipmentStages'][0]['gateInTime'] ,a['shipmentStages'][0]['arrivalTime']) <= '-1 days 0 hours 0 minutes'}" >{{subtractDates1(a['shipmentStages'][0]['gateInTime'] ,a['shipmentStages'][0]['arrivalTime'])}}</td>
+                              
+                              <td  [ngClass]="{ 'green': subtractDates1(a['shipmentStages'][0]['departureTime'] ,a['shipmentStages'][0]['gateInTime']) > '-1 days 0 hours 0 minutes', 'red': subtractDates1(a['shipmentStages'][0]['departureTime'] ,a['shipmentStages'][0]['gateInTime']) <= '-1 days 0 hours 0 minutes'}" >{{subtractDates1(a['shipmentStages'][0]['departureTime'] ,a['shipmentStages'][0]['gateInTime'])}}</td>
+
+                            <td>{{a['shipmentStages'][1]['tripPoint']['remainingDistance']}}</td>
+                   
+                            </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+        <div class="table5">
+            <table   class="shpl5" >
+                <thead>
+                    <tr>
+                        <th>At Unloading  <input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba5" disabled></th>
+                        <th>Order Number </th>
+                        <th>Status </th>
+                        <th>Secondary Status </th>
+                        <th>Order Date </th>
+                        <th>Booking branch </th>
+                        <th>Order By </th>
+                       
+                        
+                        <th>Consignor</th>
+                        <th>Consignee</th>
+                        
+                        
+                        <th>Line Items </th>
+                       <th>vehicle Number </th>
+                       <th>vehicle Type </th>
+                        <th>Creation Time </th>
+                        <th>Vehicle Status </th>
+                        <th>Shippment Number</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Order to placement</th>
+                        <th>arrivalTime</th>
+                        <th>Expected pickup vs actucal arrivalTime </th>
+                        <th>arrivalTime vs gateintime </th>
+                        <th>gateintime vs departureTime </th>
+                        <th>Remaining distance </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let a of (this.lis| filter:searchText )  ">
+                        <tr *ngIf="!a.noMatch &&a['shipmentTrackingStatus']=='At Delivery Point'">
+                            <td></td>
+                            <td>{{a['orderNumber']}}</td>
+                            <td>{{a['status']}}</td>
+                            <td [ngClass]="{ 'planned': a['secondaryStatus'] === 'PLACED', 'not-planned': a['secondaryStatus'] !== 'PLACED' }">{{a['secondaryStatus']}}</td>
+                            <td>{{GetFullName(a['orderReceiveDate'])}}</td>
+                            <td>{{a['salesOffice']['name']}}</td> 
+                            <td>{{orderby(a['customFields'])}}</td>
+                            
+                            <td>{{a['lineItems'][0]['consigner']['name']}}</td>
+                            <td>{{a['lineItems'][0]['consignee']['places'][0]['name']}}</td>
+                          
+                            
+                            <td>{{lineofitem(a['lineItems'])}}</td>
+                            <td>{{a['fleetInfo']['vehicle']['vehicleRegistrationNumber']}}</td>
+                            <td>{{a['fleetInfo']['vehicle']['vehicleLoadType']['name']}}</td>
+                            <td>{{GetFullName(a['creationTime'])}}</td>
+                            <td>{{a['shipmentTrackingStatus']}}</td>
+                            <td>{{a['shipmentNumber']}}</td>
+                            <td>{{a['shipmentStages'][0]['place']['name']}}</td>
+                            <td>{{a['shipmentStages'][1]['place']['name']}}</td>
+                            <td [ngClass]="{ 'green': GetTimeDifference(a['orderReceiveDate'], a['creationTime']) > -20, 'red': GetTimeDifference(a['orderReceiveDate'], a['creationTime']) <= -20}" >{{ GetTimeDifference1(a['orderReceiveDate'], a['creationTime']) }}</td>
+                            
+                            <td>{{date(a['shipmentStages'][0]['arrivalTime'])}}</td>
+                         
+                              <td  [ngClass]="{ 'green': subtractDates(a['lineItems'][0]['expectedPickupDate'], a['shipmentStages'][0]['arrivalTime']) > '-1 days 0 hours 0 minutes', 'red': subtractDates(a['lineItems'][0]['expectedPickupDate'], a['shipmentStages'][0]['arrivalTime']) <= '-1 days 0 hours 0 minutes'}" >{{subtractDates(a['lineItems'][0]['expectedPickupDate'], a['shipmentStages'][0]['arrivalTime'])}}</td>
+
+                              <td  [ngClass]="{ 'green': subtractDates1(a['shipmentStages'][0]['gateInTime'] ,a['shipmentStages'][0]['arrivalTime']) > '-1 days 0 hours 0 minutes', 'red': subtractDates1(a['shipmentStages'][0]['gateInTime'] ,a['shipmentStages'][0]['arrivalTime']) <= '-1 days 0 hours 0 minutes'}" >{{subtractDates1(a['shipmentStages'][0]['gateInTime'] ,a['shipmentStages'][0]['arrivalTime'])}}</td>
+                              
+                              <td  [ngClass]="{ 'green': subtractDates1(a['shipmentStages'][0]['departureTime'] ,a['shipmentStages'][0]['gateInTime']) > '-1 days 0 hours 0 minutes', 'red': subtractDates1(a['shipmentStages'][0]['departureTime'] ,a['shipmentStages'][0]['gateInTime']) <= '-1 days 0 hours 0 minutes'}" >{{subtractDates1(a['shipmentStages'][0]['departureTime'] ,a['shipmentStages'][0]['gateInTime'])}}</td>
+
+                            <td>{{a['shipmentStages'][0]['tripPoint']['remainingDistance']}}</td>
+                            </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+        <div class="table6">
+         
+            <table   class="shpl6" >
+                <thead>
+                    <tr>
+                        <th>Completed  <input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></th>
+                        <th>Order Number </th>
+                        <th>Status </th>
+                        <th>Secondary Status </th>
+                        <th>Order Date </th>
+                        <th>Booking branch </th>
+                        <th>Order By </th>
+                       
+                        
+                        <th>Consignor</th>
+                        <th>Consignee</th>
+                        
+                        
+                        <th>Line Items </th>
+                       <th>vehicle Number </th>
+                       <th>vehicle Type </th>
+                        <th>Creation Time </th>
+                        <th>Vehicle Status </th>
+                        <th>Shippment Number</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th> consignment Number</th>
+                        <th>Order to placement</th>
+                        <th>arrivalTime</th>
+                        <th>Expected pickup vs actucal arrivalTime </th>
+                        <th>arrivalTime vs gateintime </th>
+                        <th>gateintime vs departureTime </th>
+                        <th>departureTime vs unloading point </th>
+                        <th>departureTime vs arrivalTime  </th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let a of (this.li| filter:searchText )  ">
+                        <tr *ngIf="a.noMatch!='Inompleted'">
+                            <td></td>
+                            <td>{{a['orderNumber']}}</td>
+                            <td>{{a['status']}}</td>
+                            <td [ngClass]="{ 'planned': a['secondaryStatus'] === 'PLACED', 'not-planned': a['secondaryStatus'] !== 'PLACED' }">{{a['secondaryStatus']}}</td>
+                            <td>{{GetFullName(a['orderReceiveDate'])}}</td>
+                            <td>{{a['salesOffice']['name']}}</td> 
+                            <td>{{orderby(a['customFields'])}}</td>
+                            
+                            <td>{{a['lineItems'][0]['consigner']['name']}}</td>
+                            <td>{{a['lineItems'][0]['consignee']['places'][0]['name']}}</td>
+                           
+                            
+                            <td>{{lineofitem(a['lineItems'])}}</td>
+                            <td>{{a['fleetInfo']['vehicle']['vehicleRegistrationNumber']}}</td>
+                            <td>{{a['fleetInfo']['vehicle']['vehicleLoadType']['name']}}</td>
+                            <td>{{GetFullName(a['creationTime'])}}</td>
+                            <td>{{a['shipmentTrackingStatus']}}</td>
+                            <td>{{a['shipmentNumber']}}</td>
+                            <td>{{a['shipmentStages'][0]['place']['name']}}</td>
+                            <td>{{a['shipmentStages'][1]['place']['name']}}</td>
+
+                            <td>{{a['consignments'][0]['consignmentNo']}}</td>
+                            <td [ngClass]="{ 'green': GetTimeDifference(a['orderReceiveDate'], a['creationTime']) > -20, 'red': GetTimeDifference(a['orderReceiveDate'], a['creationTime']) <= -20}" >{{ GetTimeDifference1(a['orderReceiveDate'], a['creationTime']) }}</td>
+                            
+                            <td>{{date(a['shipmentStages'][0]['arrivalTime'])}}</td>
+                         
+                              <td  [ngClass]="{ 'green': subtractDates(a['lineItems'][0]['expectedPickupDate'], a['shipmentStages'][0]['arrivalTime']) > '-1 days 0 hours 0 minutes', 'red': subtractDates(a['lineItems'][0]['expectedPickupDate'], a['shipmentStages'][0]['arrivalTime']) <= '-1 days 0 hours 0 minutes'}" >{{subtractDates(a['lineItems'][0]['expectedPickupDate'], a['shipmentStages'][0]['arrivalTime'])}}</td>
+
+                              <td  [ngClass]="{ 'green': subtractDates1(a['shipmentStages'][0]['gateInTime'] ,a['shipmentStages'][0]['arrivalTime']) > '-1 days 0 hours 0 minutes', 'red': subtractDates1(a['shipmentStages'][0]['gateInTime'] ,a['shipmentStages'][0]['arrivalTime']) <= '-1 days 0 hours 0 minutes'}" >{{subtractDates1(a['shipmentStages'][0]['gateInTime'] ,a['shipmentStages'][0]['arrivalTime'])}}</td>
+                              
+                              <td  [ngClass]="{ 'green': subtractDates1(a['shipmentStages'][0]['departureTime'] ,a['shipmentStages'][0]['gateInTime']) > '-1 days 0 hours 0 minutes', 'red': subtractDates1(a['shipmentStages'][0]['departureTime'] ,a['shipmentStages'][0]['gateInTime']) <= '-1 days 0 hours 0 minutes'}" >{{subtractDates1(a['shipmentStages'][0]['departureTime'] ,a['shipmentStages'][0]['gateInTime'])}}</td>
+
+
+                              <td  [ngClass]="{ 'green': subtractDates1(a['shipmentStages'][1]['arrivalTime'] ,a['shipmentStages'][0]['departureTime']) > '-1 days 0 hours 0 minutes', 'red': subtractDates1(a['shipmentStages'][1]['arrivalTime'] ,a['shipmentStages'][0]['departureTime']) <= '-1 days 0 hours 0 minutes'}" >{{subtractDates1(a['shipmentStages'][1]['arrivalTime'] ,a['shipmentStages'][0]['departureTime'])}}</td>
+
+                              <td  [ngClass]="{ 'green': subtractDates1(a['shipmentStages'][1]['departureTime'] ,a['shipmentStages'][1]['arrivalTime']) > '-1 days 0 hours 0 minutes', 'red': subtractDates1(a['shipmentStages'][1]['departureTime'] ,a['shipmentStages'][1]['arrivalTime']) <= '-1 days 0 hours 0 minutes'}" >{{subtractDates1(a['shipmentStages'][1]['departureTime'] ,a['shipmentStages'][1]['arrivalTime'])}}</td>
+
+                           
+                            </tr>
+                    </ng-container>
+                </tbody>
+            </table>    
+        </div>
+    </div>
+      
+        
+    </div>
+
+
+
+    <footer id='footer' >
+        <button id="scroll-to-top">To Top</button>
+    </footer>

@@ -1,0 +1,92 @@
+<br>
+<div style="width:100%;">
+    <div style="display:inline-block; width:30%;">
+      <div class="box">
+          <div class="box_heading">
+              <i class="fa-solid fa-list" style="color: orange; " ></i>&nbsp;&nbsp;&nbsp;&nbsp;pending Orders
+          </div>
+              <hr>
+     <div class="box_subheading">
+        <span class="counter">{{this.pendingorder ? this.pendingorder.length : 'N/A'}}</span>
+    
+          </div>
+      </div>
+
+    </div>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <div style="display:inline-block; width:30%;">
+      <div class="box">
+          <div class="box_heading">
+              <i class="fa-solid fa-truck-pickup" style="color: #6bd098; "></i>&nbsp;&nbsp;&nbsp;&nbsp; Enroute For Pickup
+          </div>
+              <hr>
+              <div class="box_subheading">
+                  <span class="counter">{{this.enrouteforpickup ? this.enrouteforpickup.length : 'N/A'}}</span>
+                </div>
+      </div>
+    </div>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <div style="display:inline-block; width:30%;">
+      <div class="box">
+          <div class="box_heading">
+              <i class="fa-solid fa-truck-ramp-box" style="color: #ef8157; "></i>&nbsp;&nbsp;&nbsp;&nbsp;At Pickup
+          </div>
+              <hr>
+          <div class="box_subheading">
+              <span class="counter">{{this.atpickup ? this.atpickup.length : 'N/A'}}</span>
+          </div>
+      </div>
+    </div>
+    <br>
+    <br>
+  </div>
+
+    <div style="width:100%;">
+        <div style="display:inline-block; width:30%;">
+          <div class="box">
+              <div class="box_heading">
+                  <i class="fa-solid fa-truck-field-un" style="color: #51cbce; "></i>&nbsp;&nbsp;&nbsp;&nbsp;at Unloading
+              </div>
+                  <hr>
+              <div class="box_subheading">
+                  <span class="counter">{{this.atunloading ? this.atunloading.length : 'N/A'}}</span> 
+              </div>
+          </div>
+        </div>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <div style="display:inline-block; width:30%;">
+          <div class="box">
+              <div class="box_heading">
+                  <i class="fa-solid fa-truck-fast" style="color: #ef8157; "></i>&nbsp;&nbsp;&nbsp;&nbsp;Intransit
+              </div>
+                  <hr>
+              <div class="box_subheading">
+                  <span class="counter">{{this.intransit ? this.intransit.length : 'N/A'}}</span>
+              </div>
+          </div>
+        </div>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <div style="display:inline-block; width:30%;">
+          <div class="box">
+              <div class="box_heading">
+                  <i class="fa-solid fa-truck-fast" style="color: orange;" ></i>&nbsp;&nbsp;&nbsp;&nbsp;Completed
+              </div>
+                  <hr>
+              <div class="box_subheading">
+                  <span class="counter">{{this.completed ? this.completed.length : 'N/A'}}</span>
+              </div>
+          </div>
+        </div>
+      </div>
+
+        <br>
+
+      <div class="maps">
+        &nbsp;&nbsp; <span class="counter" style="font-size: 25px;">Maps</span>
+        <br>
+        <br>
+        <div class="india" id="map">
+        </div> 
+      </div>
+      <br>
+      <br>

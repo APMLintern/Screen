@@ -1,0 +1,105 @@
+:root {
+  --leaflet-tile-filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.7);
+}
+
+@media (prefers-color-scheme: dark) {
+  .leaflet-tile {
+      filter: var(--leaflet-tile-filter, none);
+      
+  }
+
+  .leaflet-container {
+      background: #303030;
+  }
+}
+// :root {
+//   --map-tiles-filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.7);
+// }
+
+// @media (prefers-color-scheme: dark) {
+//   .map-tiles {
+//       filter:var(--map-tiles-filter, none);
+// }
+// }
+#map {
+
+  // margin-bottom: 784px;
+  height: 50vh;
+  width: 75.5vw;
+  border-radius: 15px;
+  box-shadow: 10px 10px 5px #888888;
+  /* this div will be positioned relative to the container */
+}
+.maps{
+    text-transform: none;
+    font-family: Montserrat,helvetica neue,Arial,sans-serif !important;
+    font-size: 15px;
+    margin-left: 25px;
+}
+.box {
+    box-shadow: 10px 10px 5px #888888;
+
+    background-color: white;
+    margin-left: 25px;
+    border-radius: 15px;
+    text-align: center;
+    width: 18vw;
+    height: 140px;
+    width: 450px;
+    float: left;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+
+    .box_heading {
+        white-space: pre-wrap;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 25px;
+        color: #9a9a9a;
+        height: 40px;
+    }
+
+    .box_subheading {
+        font-family: Montserrat,helvetica neue,Arial,sans-serif;
+        font-weight: 400;
+        line-height: 1.5;
+        font-size: 30px;
+        height: 45px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+.counter {
+    font-size: 50px;
+    animation: count 5s;
+  }
+  
+  @keyframes count {
+    0% {
+      content: "0";
+    }
+    10% {
+      content: "1";
+    }
+    20% {
+      content: "4";
+    }
+    30% {
+      content: "5";
+    }
+    100% {
+      content: "5";
+    }
+  }
+
+
+@media (max-width: 1200px) {
+    .box {
+        width: 350px;
+        float: none;
+    }
+}

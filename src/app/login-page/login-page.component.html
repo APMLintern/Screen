@@ -1,0 +1,58 @@
+<div class="video">
+    <video style="width: 100vw;" src="../../assets/truck.mp4" autoplay loop  type="video/mp4"></video>
+    
+</div>
+<div class="s"  id="spinnerloader" > 
+  
+  <div class="spinner" > 
+  </div>
+</div>
+<div class="hello">
+   <form>
+     <div class="form_contain" style="display: flex;">
+      <img src="../../assets/logo1.png"  alt="apml">
+     
+       <br>
+       <!-- <div class="img"><img src="../../assets/logo1.png" alt="apml"></div> -->
+       <br>
+       <div  class="vl"></div>
+    <!-- Email input -->
+    <div class="login_contain">
+
+   
+    <div class="form-outline mb-4" style="display: flex;
+    align-content: center;
+    flex-direction: column;
+    align-items: center;">
+     
+        <label class="form-label" for="form2Example1" >Username</label>
+      
+      <input type="email" id="form2Example1" class="form-input" [(ngModel)]="username" name="username" placeholder=" Username" />
+      
+    </div>
+<br > <br>
+    <!-- Password input -->
+    <div class="form-outline mb-4" style="    display: flex;
+    align-content: center;
+    flex-direction: column;
+    align-items: center;">
+        <label class="form-label" for="form2Example2" >Password</label>
+      <input type="password" id="form2Example2" class="form-input"  [(ngModel)]="password" name="password" placeholder=' Password' />
+      
+    </div>
+  <br>
+    
+  
+    <!-- Submit button -->
+    <div style="    display: flex;
+   ">
+        <button type="button" class="btn btn-primary btn-block mb-4" (click)="onSubmit()">Sign in</button> &nbsp;&nbsp;
+        <button type="button" class="btn btn-primary btn-block mb-4" (click)="signup()">Sign Up</button>
+    </div>
+  </div>
+  </div>
+  
+    <!-- Register buttons -->
+    
+  </form>
+</div>

@@ -1,0 +1,79 @@
+<!-- <nav  [class.hide]="showNavbar" class='animated bounceInDown bg-dark'>
+    <ul>
+      <li class='sub-menu'><a href='#settings'>SEIMENS
+          <div class="close_button" (click)="toggleNavbar()" class='fa fa-close'>   </div></a>
+      </li>
+      <li><a routerLink='/pendingOrder'>Pending Orders</a></li>
+      <li><a routerLink='/atpickup'>at pickup</a></li>
+      <li><a routerLink='/atunloading'>at unloading</a></li>
+      <li><a routerLink='/enforpickup'>Enroute for pickup</a></li>
+      <li><a routerLink='/intransit'>Intransit</a></li>
+      <li><a routerLink='/completed'>Completed</a></li>
+      <li><a routerLink='/charts'>charts</a></li>
+      <li><a routerLink='/orderform'>Order form</a></li>
+      <li><a routerLink='/loginpage'>Logout</a></li>
+    </ul>
+  </nav> -->
+<nav [class.hide]="!showNavbar" class='animated bounceInDown bg-dark'
+  class="navbar navbar-expand-lg navbar-light bg-light component-navbar">
+  <div>
+    <ul>
+      <br>
+      <li>
+        <img src="../assets/logo1.png" style="width: 100px; height: 90px;">
+      </li>
+      <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <a routerLink='/dashboard'> <i class="fa-solid fa-bank"></i>&nbsp; DashBoard</a>
+        <span class="tooltiptext1">DashBoard will show</span>
+      </li>
+      <hr>
+      <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <a routerLink='/pendingOrder'> <i class="fa-solid fa-list"></i>&nbsp; Pending Orders</a>
+        <span class="tooltiptext1">Pending Orders will show</span>
+      </li>
+      <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a routerLink='/atpickup'> <i
+            class="fa-solid fa-truck-ramp-box"></i>&nbsp; at pickup</a>
+        <span class="tooltiptext1">At Pickup will show</span>
+      </li>
+      <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a routerLink='/atunloading'> <i
+            class="fa-solid fa-truck-field-un"></i>&nbsp; at unloading</a> <span class="tooltiptext1"> at unloading will
+          show</span>
+      </li>
+      <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a routerLink='/enforpickup'> <i
+            class="fa-solid fa-truck-pickup"></i>&nbsp; Enroute for
+          pickup</a> <span class="tooltiptext1">Enroute for pickup will
+          show</span></li>
+      <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a routerLink='/intransit'> <i
+            class="fa-solid fa-truck-fast"></i>&nbsp; Intransit</a>
+        <span class="tooltiptext1">Intransit will show</span>
+      </li>
+      <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a routerLink='/completed'><i
+            class="fa-solid fa-clipboard-list"></i>&nbsp; Completed</a>
+        <span class="tooltiptext1">Completed will show</span>
+      </li>
+      <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a routerLink='/charts'><i
+            class="fa-solid fa-chart-pie"></i>&nbsp; charts</a> <span class="tooltiptext1">chartswill show</span></li>
+      <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a routerLink='/orderform'> <i
+            class="fa-solid fa-file-waveform"></i>&nbsp; Order
+          form</a> <span class="tooltiptext1">Order form will show</span></li>
+      <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a routerLink='/pod'> <i
+            class="fa-solid fa-file-export"></i>&nbsp; POD</a> <span class="tooltiptext1">POD will show</span></li>
+      <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a routerLink='/bill'> <i
+            class="fa-solid fa-money-bill-wheat"></i>&nbsp; Billing </a> <span class="tooltiptext1">Billing Info will
+          show</span></li>
+      <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a routerLink='/payment'> <i
+            class="fa-solid fa-money-check-dollar"></i>&nbsp; payment</a>
+        <span class="tooltiptext1">payment Info will show</span>
+      </li>
+      <hr>
+      <li><a (click)="logout()"> <i class="fa-solid fa-arrow-right-from-bracket"></i>&nbsp; Logout</a> <span
+          class="tooltiptext1">Logout </span></li>
+      <!-- <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <img style="width: 30px;" [src]="role=='admin' ? admin : role=='user' ? user :nouser">
+        </li> -->
+    </ul>
+  </div>
+  <div class="navbar_footer">
+    © AGARWAL PACKERS AND MOVERS LTD. All Rights Reserved
+  </div>
+</nav>

@@ -1,0 +1,41 @@
+
+video{
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+.content {
+    position: fixed;
+    top: 40%;
+    left: 27%;
+    // background: rgba(0, 0, 0, 0.5);
+    color: #f1f1f1;
+    width: 90%;
+    // padding: 20px;
+    z-index: 99;
+  }
+  .btn{
+    padding-top: 3%;
+  }
+  #myBtn {
+    width: 280px;
+    height: 50px;
+    border-radius: 5px;
+    font-size: 15px;
+    padding: 10px;
+    border: none;
+    background: #000;
+    color: #fff;
+    cursor: pointer;
+    transition: 1s;
+    opacity: 70%;
+  }
+  #myBtn:hover{
+    opacity: 100%;
+      font-size: 20px;
+      color: red;
+  }

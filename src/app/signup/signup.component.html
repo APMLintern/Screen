@@ -1,0 +1,32 @@
+<br>
+<br>
+<div class="signup-form">
+    <form (ngSubmit)="submitSignupForm(username.value, password.value, role.value)">
+      <h2>Sign Up</h2>
+      <p>Please fill in this form to create an account.</p>
+      <hr>
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" class="form-control" id="username" required  #username>
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" id="email" required>
+      </div>
+      <div class="form-group">
+        <label for="role">Role:</label>
+        <select id="role" #role>
+            <option value="admin">Admin</option>
+            <option value="user">User</option>
+            <option value="guest">Guest</option>
+          </select>
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" class="form-control" id="password" required #password>
+      </div>
+      <hr>
+      <button type="submit" class="btn btn-primary">Sign Up</button>
+    </form>
+  </div>
+  

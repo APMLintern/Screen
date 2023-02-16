@@ -1,0 +1,304 @@
+<div class="table-infor">
+  <!-- <div class="table_image">
+    <img src="http://prod-upp-image-read.ft.com/6cf4c188-c934-11e1-a768-00144feabdc0">
+  
+</div> -->
+
+  <div class="table_heading">
+    Pending Order &nbsp; <input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba1" disabled>
+  </div>
+  <br>
+    <table class="table1" >
+        <thead>
+            <tr>
+                <!-- <th>Pending Order  <br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba1" disabled>
+                </th> -->
+                <th>Order No.</th>
+                <th>expected Pickup Date</th>
+          
+                <th>Vehicle Type</th>
+                    <th>Order By </th>
+                <!-- <th>Order Number  </th> -->
+                <!-- <th>Status </th> -->
+                <!-- <th>Secondary Status </th> -->
+                <th>Order Date </th>
+                
+            
+               
+                
+                <th>Consignor</th>
+                <th>Consignee</th>
+                <th>expected Target Date</th>
+                <th>Target Date <br> <span style="font-size:12px">(as per contract)</span> </th>
+                <th>material</th>
+               <th>SHPL instructions</th>
+               <th>Apml Remarks</th>
+               <th>Booking branch </th>
+               
+            </tr> 
+        </thead>
+        <tbody>
+            
+            <ng-container *ngFor="let a of (this.finalorder1| filter:searchText )  ">
+               
+                <tr >
+                  <td>{{a.orderNumber}}</td>
+                  <td [ngClass]="{ 'green-text': differentdate1(expecteddate(a['customFields'])) > 86400000 , 'yellow':  differentdate1(expecteddate(a['customFields']))  > 21600000 && differentdate1(expecteddate(a['customFields'])) < 86400000, 'orange':  differentdate1(expecteddate(a['customFields']))  > 0 && differentdate1(expecteddate(a['customFields'])) < 21600000,'red': differentdate1(expecteddate(a['customFields'])) < 0}  ">{{differentdate(expecteddate(a['customFields']))}}</td>
+                  <!-- <td>{{differentdate(expecteddate(a['customFields']))}}</td> -->
+                  <td *ngIf="vehicletype(a.customFields)!=null; else one" >{{vehicletype(a.customFields)}}</td>
+                  <td *ngIf="orderby(a['customFields'])!=null; else one" >{{orderby(a['customFields'])}}</td>
+                 
+                    <td  *ngIf="a['secondaryStatus']!=null; else one"   [ngClass]="{ 'planned': a['secondaryStatus'] === 'PLACED', 'not-planned': a['secondaryStatus'] !== 'PLACED' }">{{a['secondaryStatus']}}</td>
+                    <!-- <td>{{GetFullName(a['orderReceiveDate'])}}</td> -->
+                    <td *ngIf="consigner(a['lineItems'][0]['consigner']['name'])!=null; else one" >{{consigner(a['lineItems'][0]['consigner']['name'])}}</td>
+                    <td *ngIf="a['lineItems'][0]['consignee']['places'][0]['name']!=null; else one"  >{{a['lineItems'][0]['consignee']['places'][0].name}}</td>
+                    <td>Date</td>
+                    <td>Date</td>
+                    <td *ngIf="a.customFields!=null; else one" >{{MATERIAL(a['customFields'])}}</td>
+                    <td *ngIf="a.customFields!=null; else one" >{{Shpl_intr(a['customFields'])}}</td>
+                    <td *ngIf="a.customFields!=null; else one" >{{apml_remark(a['customFields'])}}</td>
+                  
+                 
+                  
+                      <td *ngIf="a['salesOffice']['name']!=null;else one">{{a['salesOffice']['name']}}</td>
+                  
+                    <ng-template #one>
+                      --
+                    </ng-template>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+
+
+<table class="table_2">
+  <thead>
+    <tr>
+        <!-- <th>Pending Order  <br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba1" disabled>
+        </th> -->
+        <th>Order Number  </th>
+        <th>Status </th>
+        <th>Secondary Status </th>
+        <th>Order Date </th>       
+    </tr>
+</thead>
+<tbody>
+    <ng-container *ngFor="let a of (this.lis| filter:searchText )  ">
+        <tr *ngIf="a.noMatch">
+      
+            <td>{{a['orderNumber']}}</td>
+            <td>{{a['status']}}</td>
+            <td  [ngClass]="{ 'planned': a['secondaryStatus'] === 'PLACED', 'not-planned': a['secondaryStatus'] !== 'PLACED' }">{{a['secondaryStatus']}}</td>
+            <td>{{GetFullName(a['orderReceiveDate'])}}</td>      
+        </tr>
+    </ng-container>
+</tbody>
+</table>
+
+
+    <!-- <mat-card class="matcard">
+        <img src="https://www.agarwalpackers.com/images/agarwal-packers-logo.png" alt="Team logo" class="team-logo" style="float: left;">
+        
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeD-i0ohxC5vcjcU5NcPAvRZslWZnGElVgaQ&usqp=CAU"  alt="Team logo" class="team-logo" style="float: right;  width: 20%; height: 6%">
+        <br>
+        <br>
+        <mat-card-title style="font-family: 'Arial Black', sans-serif; text-transform: uppercase; letter-spacing: 2px; font-size: 45px;">APML SHPL</mat-card-title>
+        <mat-card-content>
+            <br>
+            <br>
+       
+            
+            
+
+          <table style="max-width: 500px;">
+            <tr>
+         
+            </tr>
+      
+            <tr >
+              <td>Pending Order<br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba1" disabled></td>
+              <td>Onway Pickup <br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba2" disabled></td>
+              <td>At Pickup  <br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba3" disabled></td>
+              <td>In Transit  <br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba4" disabled></td>
+              <td>At unloading <br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba5" disabled></td>
+              <td>Completed <br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+              <td>POD Pending <br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+              <td>Billing <br> Pending <br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+              <td>Bill<br> Submitted <br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+              <td>MR <br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+                                      
+            </tr>
+ 
+            <tr >
+                <td>After 24 HRS <br>   Pending Order<br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba7" disabled></td>
+                <td>REQ TIME < 8 HRS <br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba2" disabled></td>
+                <td>At Pickup < 4HRS <br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba3" disabled></td>
+                <td>In Transit <br>RRPD < 200 KMS <br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba4" disabled></td>
+                <td>At unloading <br> < 4HRS <br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba5" disabled></td>
+
+                <td>EARLY <br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+
+
+                <td>POD Pending <br> < 24 hrs<br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+           
+                <td>Billing <br> Pending <br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+                <td>Bill<br> Submitted <br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+                <td>MR <br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+                                        
+              </tr>
+       
+              <tr >
+                <td>Between <br>6hrs and 24 hrs <br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba8" disabled></td>
+                <td>REQ TIME < 4 HRS<br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba2" disabled></td>
+                <td>At Pickup < 8H  <br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba3" disabled></td>
+                <td>In Transit RRPD<br> < 300 <br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba4" disabled></td>
+                <td>At unloading<br> < 12 HRS <br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba5" disabled></td>
+                <td>ONTIME <br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+                <td>POD Pending <br>< 3 days<br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+           
+                <td>Billing <br> Pending <br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+                <td>Bill<br> Submitted <br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+                <td>MR <br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+                                        
+              </tr>
+              <tr >
+                <td>0 to 6 HRS <br>Pending Order<br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba9" disabled></td>
+                <td>REQ TIME LESS 2 HRS<br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba2" disabled></td>
+                <td>At Pickup > 12H <br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba3" disabled></td>
+                <td>In Transit RRPD <br> > 300  <br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba4" disabled></td>
+                <td>At unloading <br> > 12 HRS<br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba5" disabled></td>
+                <td>DELAYED <br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+                <td>POD Pending <br> > 3 Days<br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+             
+                <td>Billing <br> Pending <br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+                <td>Bill<br> Submitted <br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+                <td>MR <br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+                                        
+              </tr>
+              <tr >
+                <td>Delayed<br> Placement<br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba10" disabled></td>
+                <td>REQ TIME LESS 2 HRS<br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba2" disabled></td>
+                <td>At Pickup > 12H <br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba3" disabled></td>
+                <td>In Transit RRPD <br>> 300  <br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba4" disabled></td>
+                <td>At unloading <br> > 12 HRS<br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba5" disabled></td>
+                <td>DELAYED <br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+                <td>POD Pending <br> 3 Days<br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+             
+                <td>Billing <br> Pending <br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+                <td>Bill<br> Submitted <br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+                <td>MR <br><input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba6" disabled></td>
+                                        
+              </tr>
+            
+          </table>
+       
+          <br>
+          <mat-card-title style="font-family: 'Arial Black', sans-serif; text-transform: uppercase; letter-spacing: 2px; font-size: 45px;">CONTRACT</mat-card-title>
+      <br>
+          <div style="display: flex;">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>SUSTAINIBILITY 2 % PER ANNUM</td>
+                      </tr> -->
+                  <!-- table 2 rows -->
+                  <!-- <tr>
+                    <td>Modernisation of Supplier Transportaion fleet</td>
+                  </tr>
+                  <tr>
+                    <td>Improvement in Capacity Utilisation</td>
+                  </tr> -->
+                  <!-- ... -->
+                  <!-- <tr>
+                    <td>Routing Optimisation</td>
+                  </tr>
+                  <tr>
+                      <td>Reduction of Wastage in Idle Time</td>
+                    </tr>
+                    <tr>
+                      <td>Reporting of co2 in kilometer tonnes</td>
+                    </tr>
+                    <tr>
+                        <td>Report on fleet modernisation with 12 months</td>
+                      </tr>
+                
+                </tbody>
+              </table>
+          
+              <table>
+                <tbody> -->
+                  <!-- table 2 rows -->
+                  <!-- <tr>
+                    <td>POD REPORT 9 AM EMAIL</td>
+                  </tr>
+                  <tr>
+                    <td>POD WITHIN 24 HRS OF DELIVERY</td>
+                  </tr> -->
+                  <!-- ... -->
+                  <!-- <tr>
+                    <td>COLOADING TRANSHIPMENT FORBIDDEN</td>
+                  </tr>
+                  <tr>
+                      <td>UNLOADING EQUIPMENT IF REQUIRED</td>
+                    </tr>
+                    <tr>
+                      <td>EMERGENCY PICKUP 4-6 HRS</td>
+                    </tr>
+                    <tr>
+                      <td>ESCORT PRE AGREED RATE IF REQ</td>
+                    </tr>
+                    <tr>
+                      <td>1 DAY BEFORE REACHING PRE INFORM CONTACT</td>
+                    </tr>
+                    <tr>
+                        <td>MONTHLY SHIPMENT LEVEL DELIVERY REPORT  </td>
+                      </tr>
+                      <tr>
+                        <td>MINUMUM 95% ON TIME DELIVERY PER MONTH </td>
+                      </tr>
+                      <tr>
+                        <td>DELAY PENALTY AFTER 2 DAYS </td>
+                      </tr>
+                </tbody>
+              </table>
+
+              <table>
+                <tbody> -->
+                  <!-- table 2 rows -->
+                  <!-- <tr>
+                    <td>PER DAY RUNNING 400 KMS</td>
+                  </tr>
+                  <tr>
+                    <td>4 HR VEHICLE PLACEMENT IN MMR IF REQ</td>
+                  </tr> -->
+                  <!-- ... -->
+                  <!-- <tr>
+                    <td>VEHICLE PLACEMENT 24 HRS </td>
+                  </tr>
+                  <tr>
+                      <td>MAX 3 HRS WAIT AT HUB</td>
+                    </tr>
+                    <tr>
+                      <td>Intransit Time</td>
+                    </tr>
+                    <tr>
+                      <td>arrive to gate in</td>
+                    </tr>
+                    <tr>
+                      <td>gate in to depart</td>
+                    </tr>
+                    <tr>
+                        <td>depart to POD </td>
+                      </tr>
+                      <tr>
+                        <td>depart to POD ,/td>
+                      </tr>
+                </tbody>
+              </table>
+          </div>
+        
+        </mat-card-content>
+      </mat-card> -->
+      
+      
+   </div>

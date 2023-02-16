@@ -1,0 +1,162 @@
+
+<div class="table_heading">
+    Completed&nbsp; <input class="caseno"
+        style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text"
+        [value]="nibba5" disabled>
+</div>
+<br>
+<div class="table5">
+    <table class="shpl5">
+        <thead>
+            <tr>
+                <th>shipment Number</th>
+                <th>Vehicle No.</th>
+                <th>Vehicle type</th>
+                <th>shipment created</th>
+                <th>Material Name</th>
+                <th>Escalations</th>
+                <th>Tracking Update</th>
+                <th>abnormalities</th>
+                <th>from</th>
+                <th>CONSIGNOR</th>
+                <th>to</th>
+                <th>CONSIGNEE</th>
+                <!-- <th>expected time</th> -->
+                <th>contract EDD</th>
+                <th>Order by EDD</th>
+                <th>Actual Arrival </th>
+                <th class="time_different"><span class="tooltiptext1"><span style="color: lightcoral; font-size: 18px;">
+                    loading Point
+                </span> a shorter difference between the time a vehicle is standing outside the Loadingpoint and the actual gate-in time in date time indicates a more efficient Loadingpoint operation. </span> at vs gt </th>
+                <th class="time_different"><span class="tooltiptext1">This time can vary depending on factors such as the efficiency of loading and unloading operations, inspections or other security procedures, and the number of vehicles inside the warehouse. </span> gt vs dt </th>
+                <th> gt vs ls</th>
+                <th> ls vs le</th>
+                <th> le vs dt</th>
+
+                <th class="time_different"><span class="tooltiptext1">This time can vary depending on factors such as the efficiency of loading and unloading operations, inspections or other security procedures, and the number of vehicles inside the warehouse. </span> at vs dt </th>
+                <th class="time_different"><span class="tooltiptext1">This time can vary depending on factors such as the efficiency of loading and unloading operations, inspections or other security procedures, and the number of vehicles inside the warehouse. </span> Transit time </th>
+                <th class="time_different"><span class="tooltiptext1">This time can vary depending on factors such as the efficiency of loading and unloading operations, inspections or other security procedures, and the number of vehicles inside the warehouse. </span>unloading <br> at vs unls</th>
+                <th>
+                    unloading <br> unls vs unle
+                </th>
+                <th>
+                    unloading <br> unle vs dt
+                </th>
+                <th>
+                    unloading <br> at vs dt
+                </th>
+               <th> Total unloading Time</th>
+               <th>Pod</th>
+               <th>Pod since</th>
+               <th>Pod Pic</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let a of (this.lis| filter:searchText )  ">
+                <tr>
+                    <td>{{a['shipmentNumber']}}</td>
+                    <td>{{a['fleetInfo']['vehicle']['vehicleRegistrationNumber']}}</td>
+                    <td>{{a['fleetInfo']['vehicle']['vehicleLoadType']['name']}}</td>
+                    <td>{{GetFullName(a['creationTime'])}}</td>
+
+                    <td *ngIf="a['consignments'][0]['lineItems'][0]['material']!=null; else ten" >{{a['consignments'][0]['lineItems'][0]['material']['name']}}</td>
+                    <ng-template #ten>
+                     No material
+                    </ng-template>
+                    <td [ngClass]="{'issue_green':issue_Escalations(a['issues']) == 0, 'issue_red':issue_Escalations(a['issues']) >= 1 }">{{issue_Escalations(a['issues'])}}</td>
+                    <td [ngClass]="{'issue_green':issue_Tracking_Update(a['issues']) == 0, 'issue_red':issue_Tracking_Update(a['issues']) >= 1 }">{{issue_Tracking_Update(a['issues'])}}</td>
+                    <td [ngClass]="{'issue_green':issue_Escalations(a['issues']) == 0, 'issue_red':issue_Escalations(a['issues']) >= 1 }">{{issue_Escalations(a['issues'])}}</td>
+
+                    <td>{{a['shipmentStages'][0]['place']['name']}}</td>
+                    <td>{{consigner(a['consignments'][0]['consigner']['name'])}}</td>
+                    <td>{{a['shipmentStages'][1]['place']['name']}}</td>
+                    <td>{{a['consignments'][0]['consignee']['name']}}</td>
+                    <td>--</td>
+                    <td>--</td>
+                    <td>{{date(a['shipmentStages'][0]['arrivalTime'])}}</td>
+                    <td 
+                        [ngClass]="{ 'green': subtractDates1(a['shipmentStages'][0]['gateInTime'] ,a['shipmentStages'][0]['arrivalTime']) < '0D 1H', 'red': subtractDates1(a['shipmentStages'][0]['gateInTime'] ,a['shipmentStages'][0]['arrivalTime']) > '0D 1H'}">
+                        {{subtractDates1(a['shipmentStages'][0]['gateInTime'] ,a['shipmentStages'][0]['arrivalTime'])}}
+                    </td>
+                    
+                    <td
+                        [ngClass]="{ 'green': subtractDates1(a['shipmentStages'][0]['departureTime'] ,a['shipmentStages'][0]['gateInTime'])< '0D 5H', 'red': subtractDates1(a['shipmentStages'][0]['departureTime'] ,a['shipmentStages'][0]['gateInTime']) > '0D 5H'}">
+                        {{subtractDates1(a['shipmentStages'][0]['departureTime']
+                        ,a['shipmentStages'][0]['gateInTime'])}}</td>
+            
+
+                        <td
+                        [ngClass]="{ 'green': subtractDates1(a['shipmentStages'][0]['actualActivityStartTime'] ,a['shipmentStages'][0]['gateInTime']) < '0D 6H', 'red': subtractDates1(a['shipmentStages'][0]['actualActivityStartTime'] ,a['shipmentStages'][0]['gateInTime']) > '0D 6H'}">
+                        {{subtractDates1(a['shipmentStages'][0]['actualActivityStartTime'] ,a['shipmentStages'][0]['gateInTime'])}}</td>
+                        <td
+                        [ngClass]="{ 'green': subtractDates1(a['shipmentStages'][0]['actualActivityEndTime'] ,a['shipmentStages'][0]['actualActivityStartTime']) < '0D 6H', 'red': subtractDates1(a['shipmentStages'][0]['actualActivityEndTime'] ,a['shipmentStages'][0]['actualActivityStartTime']) > '0D 6H'}">
+                        {{subtractDates1(a['shipmentStages'][0]['actualActivityEndTime'] ,a['shipmentStages'][0]['actualActivityStartTime'])}}</td>
+
+                        <td
+                        [ngClass]="{ 'green': subtractDates1(a['shipmentStages'][0]['departureTime'] ,a['shipmentStages'][0]['actualActivityEndTime']) < '0D 6H', 'red': subtractDates1(a['shipmentStages'][0]['departureTime'] ,a['shipmentStages'][0]['actualActivityEndTime']) > '0D 6H'}">
+                        {{subtractDates1(a['shipmentStages'][0]['departureTime'] ,a['shipmentStages'][0]['actualActivityEndTime'])}}</td>
+
+                    <td
+                        [ngClass]="{ 'green': subtractDates1(a['shipmentStages'][0]['departureTime'] ,a['shipmentStages'][0]['arrivalTime']) < '0D 6H', 'red': subtractDates1(a['shipmentStages'][0]['departureTime'] ,a['shipmentStages'][0]['arrivalTime']) > '0D 6H'}">
+                        {{subtractDates1(a['shipmentStages'][0]['departureTime']
+                        ,a['shipmentStages'][0]['arrivalTime'])}}</td>
+
+                    <td
+                        [ngClass]="{ 'green': subtractDates1(a['shipmentStages'][1]['arrivalTime'] ,a['shipmentStages'][0]['departureTime']) < '0D 5H', 'red': subtractDates1(a['shipmentStages'][1]['arrivalTime'] ,a['shipmentStages'][0]['departureTime']) > '0D 5H'}">
+                        {{subtractDates1(a['shipmentStages'][1]['arrivalTime']
+                        ,a['shipmentStages'][0]['departureTime'])}}</td>
+
+                        <td
+                        [ngClass]="{ 'green': subtractDates1(a['shipmentStages'][1]['actualActivityStartTime'] ,a['shipmentStages'][1]['arrivalTime']) < '0D 5H', 'red': subtractDates1(a['shipmentStages'][1]['actualActivityStartTime'] ,a['shipmentStages'][1]['arrivalTime']) > '0D 5H'}">
+                        {{subtractDates1(a['shipmentStages'][1]['actualActivityStartTime']     ,a['shipmentStages'][1]['arrivalTime'])}}</td>
+
+                        <td
+                        [ngClass]="{ 'green': subtractDates1(a['shipmentStages'][1]['actualActivityEndTime'] ,a['shipmentStages'][1]['actualActivityStartTime']) < '0D 6H', 'red': subtractDates1(a['shipmentStages'][1]['actualActivityEndTime'] ,a['shipmentStages'][1]['actualActivityStartTime']) > '0D 6H'}">
+                        {{subtractDates1(a['shipmentStages'][1]['actualActivityEndTime'] ,a['shipmentStages'][1]['actualActivityStartTime'])}}</td>
+
+                        <td
+                        [ngClass]="{ 'green': subtractDates1(a['shipmentStages'][1]['departureTime'] ,a['shipmentStages'][1]['actualActivityEndTime']) < '0D 6H', 'red': subtractDates1(a['shipmentStages'][1]['departureTime'] ,a['shipmentStages'][1]['actualActivityEndTime']) > '0D 6H'}">
+                        {{subtractDates1(a['shipmentStages'][1]['departureTime'] ,a['shipmentStages'][1]['actualActivityEndTime'])}}</td>
+
+                    <td
+                        [ngClass]="{ 'green': subtractDates1(a['shipmentStages'][1]['departureTime'] ,a['shipmentStages'][1]['arrivalTime']) < '0D 6H', 'red': subtractDates1(a['shipmentStages'][1]['departureTime'] ,a['shipmentStages'][1]['arrivalTime']) > '0D 6H'}">
+                        {{subtractDates1(a['shipmentStages'][1]['departureTime']
+                        ,a['shipmentStages'][1]['arrivalTime'])}}</td>
+
+
+                  
+                        <td
+                        [ngClass]="{ 'green': subtractDates1(a['shipmentStages'][1]['departureTime'] ,a['shipmentStages'][1]['arrivalTime']) < '0D 5H', 'red': subtractDates1(a['shipmentStages'][1]['departureTime'] ,a['shipmentStages'][1]['arrivalTime']) > '0D 5H'}">
+                        {{subtractDates1(a['shipmentStages'][1]['departureTime']
+                        ,a['shipmentStages'][1]['arrivalTime'])}}</td>
+
+
+                        <td *ngIf="a['consignments'][0]['pod']!=null; else noimage1 " [ngClass]="{'issue_green':a['consignments'][0]['pod'].status == 'SUBMITTED', 'issue_red':a['consignments'][0]['pod'].status =='PENDING' }">{{a['consignments'][0]['pod'].status}}</td>
+                        <ng-template #noimage1>
+                  
+                        </ng-template>
+
+                        <td *ngIf="a['consignments'][0]['pod']!=null&&a['consignments'][0]['pod'].status == 'SUBMITTED'; else pending">{{subtractDates1(a['consignments'][0]['pod'].submissionDate,a['shipmentStages'][1]['departureTime'])}}</td>
+
+                        <ng-template #pending>
+                            {{todaysdate(a['shipmentStages'][1]['departureTime'])}}
+                        </ng-template>
+
+
+                        <td><span *ngIf="a['consignments'][0]['pod']!=null&&a['consignments'][0]['pod'].status == 'SUBMITTED'; else noimage">
+                            <span >
+                                <a href="{{document_front(a['consignments'][0]['pod'].documents)}}">Front Pic</a>
+                            </span>
+                            <br>
+                            <span >
+                                <a href="{{document_back(a['consignments'][0]['pod'].documents)}}">Back Pic</a>
+                            </span>                           
+                        </span></td>
+                        <ng-template #noimage>
+                            Waiting 
+                        </ng-template>
+                    </tr>
+            </ng-container>
+        </tbody>
+    </table>
+</div>

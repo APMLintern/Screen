@@ -1,0 +1,195 @@
+<div class="form">
+  <div class="form_contain">
+    <!-- <img class="form_img"src="https://1000logos.net/wp-content/uploads/2021/11/Siemens-logo.png" width="100" height="50">  -->
+    ORDER FORM
+  </div>
+  <br>
+
+  <form #myForm="ngForm" (ngSubmit)="submitForm(myForm.value)"  [ngClass]="{'submitted': submitted}">
+  
+     
+   
+      <div>
+        <label>Origin:</label>
+        <select  [(ngModel)]="selectedOrigin" name="Origin" (change)="onOriginChange()">
+          <option value="SHPL- KOLKATA AIRPORT- SIEMENS HEALTHCARE PVT.LTD.">SHPL- KOLKATA AIRPORT- SIEMENS HEALTHCARE PVT.LTD.</option>
+          <option value="SHPL- CHENNAI SEAPORT- SIEMENS HEALTHCARE PVT.LTD.">SHPL- CHENNAI SEAPORT- SIEMENS HEALTHCARE PVT.LTD.</option>
+          <option value="SHPL- DELHI AIRPORT- SIEMENS HEALTHCARE PVT.LTD.">SHPL- DELHI AIRPORT- SIEMENS HEALTHCARE PVT.LTD.</option>
+          <option value="SHPL - APML BHIWANDI- SIEMENS HEALTHCARE PVT LTD">SHPL - APML BHIWANDI- SIEMENS HEALTHCARE PVT LTD</option>
+          <option value="SHPL- BANGALORE AIRPORT- SIEMENS HEALTHCARE PVT.LTD.">SHPL- BANGALORE AIRPORT- SIEMENS HEALTHCARE PVT.LTD.</option>
+          <option value="SHPL-APML CHENNAI- SIEMENS HEALTHCARE PVT.LTD.">SHPL-APML CHENNAI- SIEMENS HEALTHCARE PVT.LTD.</option>
+          <option value="SHPL-KOLKATA WAREHOUSE- SIEMENS HEALTHCARE PVT.LTD.">SHPL-KOLKATA WAREHOUSE- SIEMENS HEALTHCARE PVT.LTD.</option>
+          <option value="SHPL-BANGALORE WAREHOUSE- SIEMENS HEALTHCARE PVT.LTD.">SHPL-BANGALORE WAREHOUSE- SIEMENS HEALTHCARE PVT.LTD.</option>
+          <option value="SHPL-CHENNAI WAREHOUSE- SIEMENS HEALTHCARE PVT.LTD.">SHPL-CHENNAI WAREHOUSE- SIEMENS HEALTHCARE PVT.LTD.</option>
+          <option value="SHPL-DELHI WAREHOUSE- SIEMENS HEALTHCARE PVT.LTD.">SHPL-DELHI WAREHOUSE- SIEMENS HEALTHCARE PVT.LTD.</option>
+          <option value="SHPL - NAVA SHEVA- SIEMENS HEALTHCARE PVT LTD">SHPL - NAVA SHEVA- SIEMENS HEALTHCARE PVT LTD</option>
+          <option value="SHPL- KOLKATA SEAPORT- SIEMENS HEALTHCARE PVT.LTD.">SHPL- KOLKATA SEAPORT- SIEMENS HEALTHCARE PVT.LTD.</option>
+          <option value="SHPL- CHENNAI AIRPORT- SIEMENS HEALTHCARE PVT.LTD">SHPL- CHENNAI AIRPORT- SIEMENS HEALTHCARE PVT.LTD</option>
+          <option value="SHPL - BGR WAREHOUSE- SIEMENS HEALTHCARE PVT.LTD">SHPL - BGR WAREHOUSE- SIEMENS HEALTHCARE PVT.LTD</option>
+          <option value="SHPL-APML BANGALORE- SIEMENS HEALTHCARE PVT.LTD.">SHPL-APML BANGALORE- SIEMENS HEALTHCARE PVT.LTD.</option>
+          <option value="SHPL - APML CHOWK - SIEMENS HEALTHCARE PVT LTD">SHPL - APML CHOWK - SIEMENS HEALTHCARE PVT LTD</option>
+          <option value="SHPL - MUMBAI AIRPORT - SIEMENS HEALTHCARE PVT LTD">SHPL - MUMBAI AIRPORT - SIEMENS HEALTHCARE PVT LTD</option>
+          <option value="SHPL - PRESS METAL COMPANY - SIEMENS HEALTHCARE PVT. LTD.">SHPL - PRESS METAL COMPANY - SIEMENS HEALTHCARE PVT. LTD.</option>
+          <option value="SHPL - RAJLAXMI LOGISTICS PARK- SIEMENS HEALTHCARE PVT LTD">SHPL - RAJLAXMI LOGISTICS PARK- SIEMENS HEALTHCARE PVT LTD</option>
+        </select>
+      </div>
+      <br>
+      <div>
+        <label>Destination:</label>
+        <input type="text" name="Destination" (change)="onDestionChange()" [(ngModel)]="selectedDestination" required >
+      
+      </div>
+      <!-- <div>
+        <label>Location :</label>
+       <input type="text" name="Location" [(ngModel)]="selectedLocation" required>
+      </div>
+      <br>
+    
+  <div>
+      <label>Destination:</label>
+      <input type="text" name="Destination" (change)="onDestionChange()" [(ngModel)]="selectedDestination" required >
+    
+    </div>
+  <br> 
+    
+    <div>
+      <label>Vehicle Type:</label>
+      <select name="VehicleType" ngModel required>
+        <option value="20 FT ODC">20 FT ODC</option>
+        <option value="20FT AIR SUSPENSION">20FT AIR SUSPENSION</option>
+        <option value="17ft VEHICLE">17ft VEHICLE</option>
+        <option value="PICK UP">PICK UP</option>
+        <option value="24 FT PLATFORM">24 FT PLATFORM</option>
+        <option value="32 FT PLATFORM">32 FT PLATFORM</option>
+        <option value="40 FT TRAILER">40 FT TRAILER</option>
+        <option value="20 FT TRAILER">20 FT TRAILER</option>
+        <option value="40 FT AIR SUSPENSION">40 FT AIR SUSPENSION</option>
+      </select>
+    </div>
+    <br>
+    
+    <div>
+      <label>Transportation Service:</label>
+      <select name="TransportationService" ngModel required>
+        <option value="FTL">FTL</option>
+        <option value="PTL">PTL</option>
+        <option value="Express">Express</option>
+      </select>
+    </div>
+    <br>
+  
+    <div>
+      <label>Pickup Date:</label>
+      <input type="datetime-local" name="Pickup Date" ngModel required class="dark-theme">
+
+    </div>
+    <br>
+ 
+    <div>
+      <label>Booking Branch:</label>
+      <input type="text"  name="Booking_Branch" [(ngModel)]="bookingbranch" required>
+    </div>
+    <br>
+    
+    <div>
+      <label>Order By</label>
+      <select name="OrderBy" ngModel required>
+        <option value="Adinath Tajne">Adinath Tajne</option>
+        <option value="Aditya Kandharkar">Aditya Kandharkar</option>
+        <option value="Chintamani Mayeka">Chintamani Mayeka</option>
+        <option value="Jayesh Uniyal">Jayesh Uniyal</option>
+        <option value="Sujoy Dey">Sujoy Dey</option>
+        <option value="Pravin Katkar">Pravin Katkar</option>
+      </select>
+    </div>
+    <br>
+    <div>
+      <label>S.O Number/WBS Number:</label>
+      <input type="type" name="SOnumber" ngModel required>
+    </div>
+    <br>
+    <div>
+      <label>Consignee Name</label>
+      <input type="text" name="ConsigneeName" ngModel required>
+    </div>
+    <br>
+    <div>
+      <label>Consignee Address</label>
+      <input type="text" name="ConsigneeAddress" ngModel required>
+    </div>
+    <br>
+    <div>
+      <label>Consignee Pincode</label>
+      <input type="text" name="ConsigneePincode" ngModel required>
+    </div>
+    <br>
+    <div>
+      <label>PM Name</label>
+      <input type="text" name="PMName" ngModel required>
+    </div>
+    <br>
+    <div>
+      <label>PM Number</label>
+      <input type="text" name="PMNumber" ngModel required>
+    </div>
+    <br>
+    <div>
+      <label>Material</label>
+      <input type="text" name="Material" ngModel required>
+    </div>
+    <br>
+    <div>
+      <label>SHPL instructions</label>
+      <input type="text" name="SHPL_instructions" ngModel required>
+    </div> --> 
+    <!-- <div>
+      <label>Number of CC Email</label>
+      <select [(ngModel)]="ccEmailCount" (ngModelChange)="updateCCInputs()">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+    </div> -->
+    <br>
+    <!-- <div *ngFor="let i of ccEmailInputs; let j = index">
+      <input type="email" placeholder="CC Email {{j+1}}">
+    </div> -->
+    <br>
+    
+    <div class="submit_button">
+      <button type="submit" [disabled]="!myForm.valid">Submit</button>
+    </div>
+    <br>
+    
+    <div *ngIf="submitted">
+      <div class="Tq_msg" style="position: relative;" >
+        <h1>THANK YOU</h1>
+      </div>
+      <div class="celebration"
+      style="position: absolute;">
+        <svg width="600" height="90" viewBox="0 0 600 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="42" y="0" width="10" height="20"/>
+          <rect x="84" y="0" width="10" height="20"/>
+          <rect x="126" y="0" width="10" height="23"/>
+          <rect x="168" y="0" width="10" height="23"/>
+          <rect x="210" y="0" width="10" height="20"/>
+          <rect x="252" y="0" width="10" height="23"/>
+          <rect x="294" y="0" width="10" height="20"/>
+          <rect x="336" y="0" width="10" height="23"/>
+          <rect x="378" y="0" width="10" height="23"/>
+          <rect x="420" y="0" width="10" height="20"/>
+          <rect x="462" y="0" width="10" height="20"/>
+          <rect x="504" y="0" width="10" height="23"/>
+          <rect x="546" y="0" width="10" height="20"/>
+      </svg>
+      </div>
+      
+    </div>
+
+  </form>
+</div>
+<br>
+
+
