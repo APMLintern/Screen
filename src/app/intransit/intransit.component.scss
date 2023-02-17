@@ -23,16 +23,12 @@ table {
   /* Vertically center the text (icon) */
 }
 .india {
-
   background-color: rgb(7, 7, 7);
+}
 
-}
-.container{
-  position: relative;
-}
 
 #map{
-  position: absolute;
+
   top: 0;
   left: 0;
   z-index: 0;
@@ -41,20 +37,15 @@ table {
 
 .table4{
   overflow-y: hidden;
-  // position: fixed;
   opacity: 1;
 margin-top: 20px;
   top: 40px;
-  // left: 50;
-  z-index: 199;
+ 
 }
-
-
 
 .table4 {
   max-width: 1080px;
   margin-bottom: 180px;
-  margin-right: 800px;
   height: 500px;
   overflow: scroll;
   /* Set the width of each table to 50% to make them fit side by side */
@@ -63,17 +54,18 @@ margin-top: 20px;
 #map {
 
   // margin-bottom: 784px;
-  height: 99vh;
-  width: 99vw;
+  height: 50vh;
+  width: 50vw;
   border-radius: 15px;
   /* this div will be positioned relative to the container */
 }
 
 .container {
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: center;
-  align-items: center;
+  margin-top: 50px;
+display: flex;
+flex-direction: row-reverse;
+justify-content: space-evenly;
+// align-content: stretch
   /* this is the positioned ancestor element */
 }
 
@@ -87,7 +79,7 @@ margin-top: 20px;
 .table_image {
   position: relative;
   max-height: 200px;
-  z-index: -99;
+  // z-index: -99;
 }
 
 .table_image {
@@ -111,14 +103,13 @@ margin-top: 20px;
   font-weight: bold;
 }
 
-.table_heading {
-  color: #fff;
-  background-color: rgba(0, 0, 0, 0.5);
+.table_heading{
+  color: #151515;
   padding: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   font-size: 2em;
   font-weight: bold;
 }

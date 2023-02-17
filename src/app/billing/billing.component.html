@@ -1,22 +1,49 @@
 
 <div class="table_heading">
-    Billing &nbsp; <input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba5" disabled>
+    Billing     &nbsp; <input class="caseno" style="font-size: 45px; width: 80px;  text-align: center; color: red; background-color: black; " type="text" [value]="nibba5" disabled>
   </div>
 <div class="table5">
     <br>
-    <table   class="shpl5" >
+    <table class="shpl5" >
         <thead>
             <tr>
                 
                 <th>shipment Number</th>
-                <th>Vehicle No.</th>
-                <th>Vehicle type</th>
-                <th>shipment created</th>
-                <th>from</th>
-                <th>to</th>
-                <th>expected time</th>
-                <th>gateInTime vs arrivalTime</th>
-                <th>departureTime vs gateInTime</th>
+                <th>GC number</th>
+                <th>So numbber/</th>
+               <th>order by</th>
+               <th>po name</th>
+               <th>po date</th>
+            <th>from </th>
+            <th>to</th>
+               <th>pincode</th>
+               <th>maiteral</th>
+                <th>bill number</th>
+                <th>bill Date</th>
+                <th>bill submited or genr.</th>
+                <th>grm number</th>
+                <th>bill status</th>
+
+                <th>total distance</th>
+                <th>additional distance</th>
+                <th>zone</th>
+                <th>rate</th>
+
+                <th>loading</th>
+                <th>unloading</th>
+
+                <th>halting charger</th>
+                <th>two point loading /unloading</th>
+
+                <th>additonal cost </th>
+                <th>taxable value</th>
+                <th>GST</th>
+                <th>Grand total</th>
+                <th>remarks </th>
+
+
+              
+                
             </tr>
         </thead>
         <tbody>
@@ -25,23 +52,7 @@
                 
                     <td>{{a['shipmentNumber']}}</td>
                   
-                    <td>{{a['fleetInfo']['vehicle']['vehicleRegistrationNumber']}}</td>
-                    <td>{{a['fleetInfo']['vehicle']['vehicleLoadType']['name']}}</td>
-                    <td>{{GetFullName(a['creationTime'])}}</td>
-                 
-                  
-                    <td>{{a['shipmentStages'][0]['place']['name']}}</td>
-                    <td>{{a['shipmentStages'][1]['place']['name']}}</td>
-                  
-                    <td>{{date(a['shipmentStages'][0]['arrivalTime'])}}</td>
-                 
                    
-
-                      <td  [ngClass]="{ 'green': subtractDates1(a['shipmentStages'][0]['gateInTime'] ,a['shipmentStages'][0]['arrivalTime']) > '-1 days 0 hours 0 minutes', 'red': subtractDates1(a['shipmentStages'][0]['gateInTime'] ,a['shipmentStages'][0]['arrivalTime']) <= '-1 days 0 hours 0 minutes'}" >{{subtractDates1(a['shipmentStages'][0]['gateInTime'] ,a['shipmentStages'][0]['arrivalTime'])}}</td>
-                      
-                      <td  [ngClass]="{ 'green': subtractDates1(a['shipmentStages'][0]['departureTime'] ,a['shipmentStages'][0]['gateInTime']) > '-1 days 0 hours 0 minutes', 'red': subtractDates1(a['shipmentStages'][0]['departureTime'] ,a['shipmentStages'][0]['gateInTime']) <= '-1 days 0 hours 0 minutes'}" >{{subtractDates1(a['shipmentStages'][0]['departureTime'] ,a['shipmentStages'][0]['gateInTime'])}}</td>
-
-                    <td>{{a['shipmentStages'][0]['tripPoint']['remainingDistance']}}</td>
                     </tr>
             </ng-container>
         </tbody>

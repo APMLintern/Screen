@@ -37,6 +37,8 @@ import { BillingComponent } from './billing/billing.component';
 import { PaymentComponent } from './payment/payment.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SignupComponent } from './signup/signup.component';
+import { MbrComponent } from './mbr/mbr.component';
+import { QbrComponent } from './qbr/qbr.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +64,9 @@ import { SignupComponent } from './signup/signup.component';
            BillingComponent,
            PaymentComponent,
            DashboardComponent,
-           SignupComponent
+           SignupComponent,
+           MbrComponent,
+           QbrComponent
   ],
   imports: [
     NgxPaginationModule,

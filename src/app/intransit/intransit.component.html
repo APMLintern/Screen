@@ -15,10 +15,10 @@
               <tr>
                   <th>shipment Number </th>
                   <th>Vehicle No.</th>
-                  <th>Documents<br>
+                  <!-- <th>Documents<br>
                 Fit||INC||PUC||NP||permit</th>
                 <th>Fast tag</th>
-                <th>Last loc.</th>
+                <th>Last loc.</th> -->
                   <th>Vehicle type</th>
                   <th>shipment created</th>
                   <th>from</th>
@@ -30,14 +30,15 @@
               </tr>
           </thead>
           <tbody>
-             <ng-container *ngFor="let b of (this.googlesheet| filter:searchText ) " >
+             <!-- <ng-container *ngFor="let b of (this.googlesheet| filter:searchText ) " > -->
               <ng-container *ngFor="let a of (this.lis| filter:searchText )  ">
-                <ng-container *ngFor="let c of (this.googlesheet1| filter:searchText )">
-                  <tr *ngIf="!a.noMatch && a['shipmentTrackingStatus']=='Enroute For Delivery' && a['fleetInfo']['vehicle']['vehicleRegistrationNumber']===b['rc_regn_no'] &&c['vehicelenum'] ===a['fleetInfo']['vehicle']['vehicleRegistrationNumber'] ">
+                <!-- <ng-container *ngFor="let c of (this.googlesheet1| filter:searchText )"> -->
+                  <tr *ngIf="!a.noMatch && a['shipmentTrackingStatus']=='Enroute For Delivery' ">
+                  <!-- && a['fleetInfo']['vehicle']['vehicleRegistrationNumber']===b['rc_regn_no'] &&c['vehicelenum'] ===a['fleetInfo']['vehicle']['vehicleRegistrationNumber'] "> -->
                       <td>{{a['shipmentNumber']}}</td> 
                       <td>{{a['fleetInfo']['vehicle']['vehicleRegistrationNumber']}}</td>
 
-                    <td >
+                    <!-- <td >
                         <button  [ngClass]="color(b['rc_fit_upto'])"></button>&nbsp;
                         <button  [ngClass]="color(b['rc_insurance_upto'])"></button>&nbsp;
                         <button  [ngClass]="color(b['rc_pucc_upto'])"></button>&nbsp;
@@ -50,7 +51,7 @@
                
                     
                     
-                      <td><a href="https://www.google.com/maps/place/{{c['tollPlazaGeocode']}}" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: black;">{{c['tollPlazaName']}}</a></td>
+                      <td><a href="https://www.google.com/maps/place/{{c['tollPlazaGeocode']}}" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: black;">{{c['tollPlazaName']}}</a></td> -->
 
 
                       <td>{{a['fleetInfo']['vehicle']['vehicleLoadType']['name']}}</td>
@@ -63,8 +64,8 @@
                       <td>{{remaingkms(a['shipmentStages'][1]['tripPoint']['remainingDistance'])}}</td>
                       </tr>
               </ng-container>
-              </ng-container>
-            </ng-container>
+              <!-- </ng-container>
+            </ng-container> -->
           </tbody>
       </table>
   </div>

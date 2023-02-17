@@ -51,9 +51,7 @@
 	background-color: #151515;
 }
 
-.wrapper {
-	margin-left: 260px;
-}
+
 
 .button {
 	width: 100px;
@@ -145,15 +143,17 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-	background: rgb(0, 204, 204);
+	background: red;
 	color: #fff;
 }
 
 .active {
-	height: 34px;
-	border-right: 17px solid red;
-	border-top: 17px solid transparent;
-	border-bottom: 17px solid transparent;
+	border-radius: 10px;
+	background: red;
+	// height: 34px;
+	// border-right: 17px solid red;
+	// border-top: 17px solid transparent;
+	// border-bottom: 17px solid transparent;
 }
 
 nav ul li a .fa {
@@ -226,14 +226,19 @@ nav a:hover {
 	width: 25px;
 	background-color: #fff;
 }
+.wrapper {
+	margin-left: 260px;
+	
 
+	
+}
 .search_bar {
 	margin-left: 260px;
 	background-color: #333;
 	padding: 20px;
 	display: flex;
-	height: 30px;
-	width: 100vw;
+	height: 50px;
+	width: 100%;
 	justify-content: space-between;
 }
 

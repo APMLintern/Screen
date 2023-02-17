@@ -333,6 +333,42 @@ axios(config)
     }
     return abc
   }
+  consignee(_a:any){
+    var abc;
+    for (let i = 0; i < _a.length; i++) {
+      if (_a[i]['fieldKey'] == "Consignee Name") {
+        abc = _a[i]['value'];
+        break
+      }else{
+        abc="a['lineItems'][0]['consignee']['places'][0].name"
+      }
+    }
+    return abc
+  }
+  expectedpickup(_a:any){
+    var abc;
+    for (let i = 0; i < _a.length; i++) {
+      if (_a[i]['fieldKey'] == "expected pickup date and time") {
+        abc = _a[i]['value'];
+        break
+      }else{
+        abc="--"
+      }
+    }
+    return abc
+  }
+  expectedtarget(_a:any){
+    var abc;
+    for (let i = 0; i < _a.length; i++) {
+      if (_a[i]['fieldKey'] == "EXPECTED TARGET DATE:") {
+        abc = _a[i]['value'];
+        break
+      }else{
+        abc="--"
+      }
+    }
+    return abc
+  }
   apml_remark(_a:any){
     var abc;
     for (let i = 0; i < _a.length; i++) {

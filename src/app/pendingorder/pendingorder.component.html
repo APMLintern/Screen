@@ -21,7 +21,7 @@
                 <!-- <th>Order Number  </th> -->
                 <!-- <th>Status </th> -->
                 <!-- <th>Secondary Status </th> -->
-                <th>Order Date </th>
+                <th>Order Days </th>
                 
             
                
@@ -47,13 +47,18 @@
                   <!-- <td>{{differentdate(expecteddate(a['customFields']))}}</td> -->
                   <td *ngIf="vehicletype(a.customFields)!=null; else one" >{{vehicletype(a.customFields)}}</td>
                   <td *ngIf="orderby(a['customFields'])!=null; else one" >{{orderby(a['customFields'])}}</td>
-                 
-                    <td  *ngIf="a['secondaryStatus']!=null; else one"   [ngClass]="{ 'planned': a['secondaryStatus'] === 'PLACED', 'not-planned': a['secondaryStatus'] !== 'PLACED' }">{{a['secondaryStatus']}}</td>
+                  
+                  <td>{{GetFullName(a['orderDate'])}}</td>
+                    
                     <!-- <td>{{GetFullName(a['orderReceiveDate'])}}</td> -->
                     <td *ngIf="consigner(a['lineItems'][0]['consigner']['name'])!=null; else one" >{{consigner(a['lineItems'][0]['consigner']['name'])}}</td>
-                    <td *ngIf="a['lineItems'][0]['consignee']['places'][0]['name']!=null; else one"  >{{a['lineItems'][0]['consignee']['places'][0].name}}</td>
-                    <td>Date</td>
-                    <td>Date</td>
+                    <td><textarea style="overflow:auto" rows="2">
+                      {{consignee(a.customFields)}}
+                    </textarea></td>
+                    <!-- <td *ngIf="a['lineItems'][0]['consignee']['places'][0]['name']!=null; else one"  >{{a['lineItems'][0]['consignee']['places'][0].name}}</td> -->
+                    <td>{{expectedpickup(a.customFields)}}</td>
+                    <td>{{expectedtarget(a.customFields)}}</td>
+                    
                     <td *ngIf="a.customFields!=null; else one" >{{MATERIAL(a['customFields'])}}</td>
                     <td *ngIf="a.customFields!=null; else one" >{{Shpl_intr(a['customFields'])}}</td>
                     <td *ngIf="a.customFields!=null; else one" >{{apml_remark(a['customFields'])}}</td>

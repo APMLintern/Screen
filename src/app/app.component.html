@@ -56,6 +56,14 @@
                   class="fa-solid fa-money-check-dollar"></i>&nbsp; payment</a>
               <span class="tooltiptext1">payment Info will show</span>
             </li>
+            <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a routerLink='/mbr'> <i
+                  class="fa-solid fa-envelopes-bulk"></i>&nbsp; MBR</a>
+              <span class="tooltiptext1">MBR Info will show</span>
+            </li>
+            <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a routerLink='/qbr'> <i
+                  class="fa-solid fa-envelope"></i>&nbsp; QBR</a>
+              <span class="tooltiptext1">QBR Info will show</span>
+            </li>
             <hr>
             <li><a (click)="logout()"> <i class="fa-solid fa-arrow-right-from-bracket"></i>&nbsp; Logout</a> <span
                 class="tooltiptext1">Logout </span></li>

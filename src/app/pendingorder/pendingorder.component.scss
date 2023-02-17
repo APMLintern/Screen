@@ -5,19 +5,9 @@
   /* Arrange the flex items in a row */
 }
 
-.matcard {
 
-  margin-top: 50px;
-  background-color: #252525;
-  color: #fff;
-  text-align: center;
-  width: 1200px;
-  height: 1450PX;
-  margin-left: 200px;
-}
 
 .table-infor {
-
   width: 100vw;
 }
 .table_image {
@@ -57,13 +47,12 @@
   display: none
 }
 .table_heading{
-  color: #fff;
-  background-color: rgba(0,0,0,0.5);
+  color: #151515;
   padding: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   font-size: 2em;
   font-weight: bold;
 }

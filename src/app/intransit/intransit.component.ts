@@ -192,81 +192,78 @@ export class IntransitComponent implements OnInit {
         }
 
 
-// setInterval(() => {
-//   navigator.geolocation.getCurrentPosition((position) => {
-//     var coordinates = origindata;
-//     var datatr = coordinates.map(x => [parseFloat(x.split(',')[0]), parseFloat(x.split(',')[1])]);
-//     var coordinates12 = destinationdata;
-//     var datatr12 = coordinates12.map(x => [parseFloat(x.split(',')[0]), parseFloat(x.split(',')[1])]);
-//     var coordinates14 = vehicleloaction;
-//     var datatr14 = coordinates14.map(x => [parseFloat(x.split(',')[0]), parseFloat(x.split(',')[1])]);
-//     var coordinates15 = vehiclenumber;
-//     var datatr15 = coordinates15;
-//     var coordinates16 = remaingkm;
-//     var datatr16 = coordinates16;
-//     console.log(datatr14)
-//     const latLong1 = [12.8628,20.8025 ];
-//     let mymap = L.map('map').setView(latLong1, 4);
-//     L.tileLayer(
-//       'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=sk.eyJ1IjoicHVuaXRtaXN0cnkiLCJhIjoiY2wxeWx6a2wwMGR4NDNibHBqeDZibjExZiJ9.GFI87Dt8zH2pMF6QVywS5A',
-//       {
-//         attribution:
-//           'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-//         maxZoom: 18,
-        
-//         id: 'mapbox/streets-v11',
-//         tileSize: 512,
-//         zoomOffset: -1,
-//         accessToken: 'pk.eyJ1IjoicHVuaXRtaXN0cnkiLCJhIjoiY2w4NGFsa3F5MDExeTQxcDVkMzc5dm5seSJ9.z3Y8JC8jThJ1e3R67u18Kg',
-        
-//       }
-//     ).addTo(mymap);
-    
-//     var myIcon = L.icon({
-//       iconUrl: 'http://scm.apml.in/assets/images/trip_details_icon/upcomming_point.png',
+ setInterval(() => {
+   navigator.geolocation.getCurrentPosition((position) => {
+     var coordinates = origindata;
+     var datatr = coordinates.map(x => [parseFloat(x.split(',')[0]), parseFloat(x.split(',')[1])]);
+     var coordinates12 = destinationdata;
+     var datatr12 = coordinates12.map(x => [parseFloat(x.split(',')[0]), parseFloat(x.split(',')[1])]);
+     var coordinates14 = vehicleloaction;
+     var datatr14 = coordinates14.map(x => [parseFloat(x.split(',')[0]), parseFloat(x.split(',')[1])]);
+     var coordinates15 = vehiclenumber;
+     var datatr15 = coordinates15;
+     var coordinates16 = remaingkm;
+     var datatr16 = coordinates16;
+     console.log(datatr14)
+     const latLong1 = [20.5937,90.8025 ];
+     let mymap = L.map('map').setView(latLong1, 4);
+     L.tileLayer(
+       'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=sk.eyJ1IjoicHVuaXRtaXN0cnkiLCJhIjoiY2wxeWx6a2wwMGR4NDNibHBqeDZibjExZiJ9.GFI87Dt8zH2pMF6QVywS5A',
+       {
+         attribution:
+           'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+         maxZoom: 18,      
+         id: 'mapbox/streets-v11',
+         tileSize: 512,
+         zoomOffset: -1,
+         accessToken: 'pk.eyJ1IjoicHVuaXRtaXN0cnkiLCJhIjoiY2w4NGFsa3F5MDExeTQxcDVkMzc5dm5seSJ9.z3Y8JC8jThJ1e3R67u18Kg',      
+       }
+     ).addTo(mymap);  
+     var myIcon =  L.divIcon({
+          html: '<i style="font-size:20px;color:green" class="fa-solid fa-truck-moving"></i>',
       
-      
-//     });
-//     for (var i = 0; i < datatr12.length; i++) {
-//       //  let marker = new L.marker([datatr12[i][0], datatr12[i][1]])
-//       //     .bindPopup(datatr12[i][0])
-//       //     .addTo(mymap);
-//       //     let marker2 = new L.marker([datatr[i][0], datatr[i][1]])
-//       //     .bindPopup(datatr[i][0])
-//       //     .addTo(mymap);
-//       let marker5 = new L.marker([datatr14[i][0], datatr14[i][1]],)
-//         .bindPopup(datatr14[i][0])
-//         .addTo(mymap);
-//       marker5.bindPopup(`<b>${datatr15[i]}<br><span style="color:red;">${datatr16[i]}kms.</span></b>`);
-//       var polygon = L.polyline([
-//         [datatr12[i][0], datatr12[i][1]],
-//         [datatr14[i][0], datatr14[i][1]]
-//       ]).addTo(mymap);
-//       var polygon1 = L.polyline([
-//         [datatr[i][0], datatr[i][1]],
-//         [datatr14[i][0], datatr14[i][1]]
-//       ]).addTo(mymap);
-//       polygon.setStyle({
-//         color: 'red',
-//         dashArray: '5, 5', dashOffset: '0'
-//       });
-//       polygon1.setStyle({
-//         color: 'green',
-//         dashArray: '15, 15', dashOffset: '0'
-//       });
-//       let circle1 = L.circle([datatr[i][0], datatr[i][1]], {
-//         color: 'yellow',
-//         fillColor: '#f03',
-//         fillOpacity: 0.5,
-//         radius: 5000
-//       }).addTo(mymap);
-//       let circle = L.circle([datatr12[i][0], datatr12[i][1]], {
-//         color: 'red',
-//         fillColor: '#252525',
-//         fillOpacity: 0.5,
-//         radius: 5000
-//       }).addTo(mymap);
-//     }
+          className: 'myDivIcon'
+      });
+    for (var i = 0; i < datatr12.length; i++) {
+      //  let marker = new L.marker([datatr12[i][0], datatr12[i][1]])
+      //     .bindPopup(datatr12[i][0])
+      //     .addTo(mymap);
+      //     let marker2 = new L.marker([datatr[i][0], datatr[i][1]])
+      //     .bindPopup(datatr[i][0])
+      //     .addTo(mymap);
+      let marker5 = new L.marker([datatr14[i][0], datatr14[i][1]],{ icon:  myIcon})
+        .bindPopup(datatr14[i][0])
+        .addTo(mymap);
+      marker5.bindPopup(`<b>${datatr15[i]}<br><span style="color:red;">${datatr16[i]}kms.</span></b>`);
+      var polygon = L.polyline([
+        [datatr12[i][0], datatr12[i][1]],
+        [datatr14[i][0], datatr14[i][1]]
+      ]).addTo(mymap);
+      var polygon1 = L.polyline([
+        [datatr[i][0], datatr[i][1]],
+        [datatr14[i][0], datatr14[i][1]]
+      ]).addTo(mymap);
+      polygon.setStyle({
+        color: 'red',
+        dashArray: '5, 5', dashOffset: '0'
+      });
+      polygon1.setStyle({
+        color: 'black',
+        dashArray: '15, 15', dashOffset: '0'
+      });
+      let circle1 = L.circle([datatr[i][0], datatr[i][1]], {
+        color: 'yellow',
+        fillColor: '#f03',
+        fillOpacity: 0.5,
+        radius: 5000
+      }).addTo(mymap);
+      let circle = L.circle([datatr12[i][0], datatr12[i][1]], {
+        color: 'red',
+        fillColor: '#252525',
+        fillOpacity: 0.5,
+        radius: 5000
+      }).addTo(mymap);
+    }
 //     //     marker.bindPopup(`<b>${this.vehiclenumber}</b>`).openPopup();
 //     //     let circle = L.circle(origin, {
 //     //       color: 'red',
@@ -289,8 +286,8 @@ export class IntransitComponent implements OnInit {
 //     //   .setLatLng(latLong)
 //     //   .setContent('I am Punit')
 //     //   .openOn(mymap);
-//   });
-// }, 10000);
+  });
+}, 1000);
         
        
       })
@@ -418,119 +415,95 @@ export class IntransitComponent implements OnInit {
        console.log(fasttag,"sahdbvajhsbdj")
        this.googlesheet1 =fasttag
       //  setInterval(() => {
-        navigator.geolocation.getCurrentPosition((position) => {
-          var coordinates = origindata;
-          var datatr = coordinates.map(x => [parseFloat(x.split(',')[0]), parseFloat(x.split(',')[1])]);
-          var coordinates12 = destinationdata;
-          var datatr12 = coordinates12.map(x => [parseFloat(x.split(',')[0]), parseFloat(x.split(',')[1])]);
-          var coordinates14 = vehicleloaction;
-          var datatr14 = coordinates14.map(x => [parseFloat(x.split(',')[0]), parseFloat(x.split(',')[1])]);
-          var coordinates15 = vehiclenumber;
-          var datatr15 = coordinates15;
-          var coordinates16 = remaingkm;
-          var datatr16 = coordinates16;
+//         navigator.geolocation.getCurrentPosition((position) => {
+//           var coordinates = origindata;
+//           var datatr = coordinates.map(x => [parseFloat(x.split(',')[0]), parseFloat(x.split(',')[1])]);
+//           var coordinates12 = destinationdata;
+//           var datatr12 = coordinates12.map(x => [parseFloat(x.split(',')[0]), parseFloat(x.split(',')[1])]);
+//           var coordinates14 = vehicleloaction;
+//           var datatr14 = coordinates14.map(x => [parseFloat(x.split(',')[0]), parseFloat(x.split(',')[1])]);
+//           var coordinates15 = vehiclenumber;
+//           var datatr15 = coordinates15;
+//           var coordinates16 = remaingkm;
+//           var datatr16 = coordinates16;
           
-          const latLong1 = [12.8628,45.8025 ];
-          let mymap = L.map('map').setView(latLong1, 4);
-          L.tileLayer(
-            'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=sk.eyJ1IjoicHVuaXRtaXN0cnkiLCJhIjoiY2wxeWx6a2wwMGR4NDNibHBqeDZibjExZiJ9.GFI87Dt8zH2pMF6QVywS5A',
-            {
-              attribution:
-                'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-              maxZoom: 18,
+//           const latLong1 = [20.5937,90.8025 ];
+//           let mymap = L.map('map').setView(latLong1, 4);
+//           L.tileLayer(
+//             'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=sk.eyJ1IjoicHVuaXRtaXN0cnkiLCJhIjoiY2wxeWx6a2wwMGR4NDNibHBqeDZibjExZiJ9.GFI87Dt8zH2pMF6QVywS5A',
+//             {
+//               attribution:
+//                 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+//               maxZoom: 18,
               
-              id: 'mapbox/streets-v11',
-              tileSize: 512,
-              zoomOffset: -1,
-              accessToken: 'pk.eyJ1IjoicHVuaXRtaXN0cnkiLCJhIjoiY2w4NGFsa3F5MDExeTQxcDVkMzc5dm5seSJ9.z3Y8JC8jThJ1e3R67u18Kg',
+//               id: 'mapbox/streets-v11',
+//               tileSize: 512,
+//               zoomOffset: -1,
+//               accessToken: 'pk.eyJ1IjoicHVuaXRtaXN0cnkiLCJhIjoiY2w4NGFsa3F5MDExeTQxcDVkMzc5dm5seSJ9.z3Y8JC8jThJ1e3R67u18Kg',
               
-            }
-          ).addTo(mymap);
+//             }
+//           ).addTo(mymap);
           
-          var myIcon =  L.divIcon({
-    html: '<i style="font-size:20px" class="fa-solid fa-tower-observation"></i>',
+//           var myIcon =  L.divIcon({
+//     html: '<i style="font-size:20px" class="<i class="fa-solid fa-truck-moving"></i>"></i>',
 
-    className: 'myDivIcon'
-});
-          for (var i = 0; i < datatr15.length; i++) {
-            console.log(datatr15[i],"HEJKSDKB",this.googlesheet1[i].vehicelenum)
+//     className: 'myDivIcon'
+// });
+//           for (var i = 0; i < datatr15.length; i++) {
+//             console.log(datatr15[i],"HEJKSDKB",this.googlesheet1[i].vehicelenum)
 
-            const matchingGeocodes = this.googlesheet1.map((item, index) => {
-              if (item.vehiclenum === datatr15[index]) {
+//             // const matchingGeocodes = this.googlesheet1.map((item, index) => {
+//             //   if (item.vehiclenum === datatr15[index]) {
            
-                let marker6 = new L.marker([this.googlesheet1[i].tollPlazaGeocode.split(",")[0], this.googlesheet1[i].tollPlazaGeocode.split(",")[1]],{ icon:  myIcon})
-                .bindPopup(`<b>${datatr15[i]}<br><span style="color:red;">${this.googlesheet1[i].tollPlazaName}</span></b>`)
-                .addTo(mymap);
-                return true
-              } else {
-                return null; // or any other default value for non-matching elements
-              }
-            });
-
-
-           
+//             //     let marker6 = new L.marker([this.googlesheet1[i].tollPlazaGeocode.split(",")[0], this.googlesheet1[i].tollPlazaGeocode.split(",")[1]],{ icon:  myIcon})
+//             //     .bindPopup(`<b>${datatr15[i]}<br><span style="color:red;">${this.googlesheet1[i].tollPlazaName}</span></b>`)
+//             //     .addTo(mymap);
+//             //     return true
+//             //   } else {
+//             //     return null; // or any other default value for non-matching elements
+//             //   }
+//             // });
 
 
            
-            let marker5 = new L.marker([datatr14[i][0], datatr14[i][1]],)
-              .bindPopup(datatr14[i][0])
-              .addTo(mymap);
-            marker5.bindPopup(`<b>${datatr15[i]}<br><span style="color:red;">${datatr16[i]}kms.</span></b>`);
-            var polygon = L.polyline([
-              [datatr12[i][0], datatr12[i][1]],
-              [datatr14[i][0], datatr14[i][1]]
-            ]).addTo(mymap);
-            var polygon1 = L.polyline([
-              [datatr[i][0], datatr[i][1]],
-              [datatr14[i][0], datatr14[i][1]]
-            ]).addTo(mymap);
-            polygon.setStyle({
-              color: 'red',
-              dashArray: '5, 5', dashOffset: '0'
-            });
-            polygon1.setStyle({
-              color: 'green',
-              dashArray: '15, 15', dashOffset: '0'
-            });
-            let circle1 = L.circle([datatr[i][0], datatr[i][1]], {
-              color: 'yellow',
-              fillColor: '#f03',
-              fillOpacity: 0.5,
-              radius: 5000
-            }).addTo(mymap);
-            let circle = L.circle([datatr12[i][0], datatr12[i][1]], {
-              color: 'red',
-              fillColor: '#252525',
-              fillOpacity: 0.5,
-              radius: 5000
-            }).addTo(mymap);
-          }
-          //     marker.bindPopup(`<b>${this.vehiclenumber}</b>`).openPopup();
-          //     let circle = L.circle(origin, {
-          //       color: 'red',
-          //       fillColor: '#f03',
-          //       fillOpacity: 0.5,
-          //       radius: 2000
-          //   }).addTo(mymap);
-          //     let circle1 = L.circle(destination, {
-          //       color: 'yellow',
-          //       fillColor: '#f03',
-          //       fillOpacity: 0.5,
-          //       radius: 2000
-          //   }).addTo(mymap);
-          //   
-          //   let polygon1 = L.polyline([
-          //     latLong,
-          //     origin
-          // ]).addTo(mymap);
-          // let popup = L.popup()
-          //   .setLatLng(latLong)
-          //   .setContent('I am Punit')
-          //   .openOn(mymap);
-        });
-      // }, );
 
-       
+
+           
+//             let marker5 = new L.marker([datatr14[i][0], datatr14[i][1]],)
+//               .bindPopup(datatr14[i][0])
+//               .addTo(mymap);
+//             marker5.bindPopup(`<b>${datatr15[i]}<br><span style="color:red;">${datatr16[i]}kms.</span></b>`);
+//             var polygon = L.polyline([
+//               [datatr12[i][0], datatr12[i][1]],
+//               [datatr14[i][0], datatr14[i][1]]
+//             ]).addTo(mymap);
+//             var polygon1 = L.polyline([
+//               [datatr[i][0], datatr[i][1]],
+//               [datatr14[i][0], datatr14[i][1]]
+//             ]).addTo(mymap);
+//             polygon.setStyle({
+//               color: 'red',
+//               dashArray: '5, 5', dashOffset: '0'
+//             });
+//             polygon1.setStyle({
+//               color: 'green',
+//               dashArray: '15, 15', dashOffset: '0'
+//             });
+//             let circle1 = L.circle([datatr[i][0], datatr[i][1]], {
+//               color: 'yellow',
+//               fillColor: '#f03',
+//               fillOpacity: 0.5,
+//               radius: 5000
+//             }).addTo(mymap);
+//             let circle = L.circle([datatr12[i][0], datatr12[i][1]], {
+//               color: 'red',
+//               fillColor: '#252525',
+//               fillOpacity: 0.5,
+//               radius: 5000
+//             }).addTo(mymap);
+//           }
+    
+//         });      
       })
       
       .catch(function (error1) {

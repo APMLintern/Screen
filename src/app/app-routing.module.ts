@@ -24,6 +24,8 @@ import { BillingComponent } from './billing/billing.component';
 import { PaymentComponent } from './payment/payment.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SignupComponent } from './signup/signup.component';
+import { MbrComponent } from './mbr/mbr.component';
+import { QbrComponent } from './qbr/qbr.component';
 
 // import {RcComponent} from '../../../../RC/RC_expire/src/app/rc/rc.component'
 const routes: Routes = [
@@ -52,6 +54,10 @@ const routes: Routes = [
   {path:"orderform",component:OrderformComponent, canActivate: [AuthGuard], data: { allowedRoles: ['admin'] }},
   {path:"test",component:TestingComponent, canActivate: [AuthGuard],data: { allowedRoles: ['admin'] }},
   {path:"pod",component:PodComponent, canActivate: [AuthGuard],data: { allowedRoles: ['admin'] }},
+
+  {path:"mbr",component:MbrComponent, canActivate: [AuthGuard],data: { allowedRoles: ['admin'] }},
+  {path:"qbr",component:QbrComponent, canActivate: [AuthGuard],data: { allowedRoles: ['admin'] }},
+
   {path:"bill",component:BillingComponent, canActivate: [AuthGuard],data: { allowedRoles: ['admin'] }},
   {path:"payment",component:PaymentComponent, canActivate: [AuthGuard],data: { allowedRoles: ['admin'] }},
 ];
