@@ -337,7 +337,7 @@ axios(config)
     var abc;
     for (let i = 0; i < _a.length; i++) {
       if (_a[i]['fieldKey'] == "Consignee Name") {
-        abc = _a[i]['value'];
+        abc = _a[i]['value'].replaceAll(' ','');
         break
       }else{
         abc="a['lineItems'][0]['consignee']['places'][0].name"
